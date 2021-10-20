@@ -22,9 +22,7 @@ app.use(morgan("dev"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  "/styles",
-  sassMiddleware({
+app.use("/styles",sassMiddleware({
     source: __dirname + "/styles",
     destination: __dirname + "/public/styles",
     isSass: false, // false => scss, true => sass
