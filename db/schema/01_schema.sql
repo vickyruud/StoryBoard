@@ -24,11 +24,10 @@ CREATE TABLE stories (
 
 CREATE TABLE contributions (
   id SERIAL PRIMARY KEY NOT NULL,
-  title TEXT,
   contribution_text TEXT,
   status VARCHAR(255) DEFAULT 'In Progress',
   created_on DATE NOT NULL,
   votes INTEGER,
-  author_id INTEGER REFERENCES users(id)  ON DELETE CASCADE,
+  contributor_id INTEGER REFERENCES users(id)  ON DELETE CASCADE,
   story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE
 );
