@@ -1,7 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
 const database = require("./database");
-const loginRoute = require("./routes/loginRoute")
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -26,32 +25,34 @@ app.use(
     name: "session",
     secret: "happy-light",
   })
-);
-
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-
-app.use(
-  "/styles",
-  sassMiddleware({
-    source: __dirname + "/styles",
-    destination: __dirname + "/public/styles",
-    isSass: false, // false => scss, true => sass
-  })
-);
-
-app.use(express.static("public"));
-
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const storiesRoutes = require("./routes/stories");
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/stories", storiesRoutes(db));
-// Note: mount other resources here, using the same pattern above
+  );
+  
+  app.set("view engine", "ejs");
+  app.use(express.urlencoded({ extended: true }));
+  
+  app.use(
+    "/styles",
+    sassMiddleware({
+      source: __dirname + "/styles",
+      destination: __dirname + "/public/styles",
+      isSass: false, // false => scss, true => sass
+    })
+    );
+    
+    app.use(express.static("public"));
+    
+    // Separated Routes for each Resource
+    // Note: Feel free to replace the example routes below with your own
+    const usersRoutes = require("./routes/users");
+    const loginRoute = require("./routes/loginRoute");
+    const storiesRoutes = require("./routes/stories")
+    
+    // Mount all resource routes
+    // Note: Feel free to replace the example routes below with your own
+    app.use("/api/users", usersRoutes(db));
+    app.use("/api/stories", storiesRoutes(db));
+    app.use("/api/login", loginRoute(db));
+    // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -61,24 +62,7 @@ app.get("/", (req, res) => {
   const templateVars = {user : undefined};
   res.render("index", templateVars);
 });
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-app.post("/login", (req, res) => {
-  const user = loginRoute(req.body.email)
-  console.log(user);
-  if (user) {
-    console.log(user);
-    req.session.user_Id = user.id;
-    const templateVars={user:user};
-    console.log(templateVars);
-    res.render("index",templateVars);
-  } else {
-    res.statusCode = 400;
-    res.send("Incorrect username/password");
-  }
-  res.render("login");
-});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
