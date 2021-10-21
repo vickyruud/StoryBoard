@@ -9,5 +9,5 @@ const login = function (email, password) {
     return null;
   });
 };
-exports.login = login;
+module.exports = login;
 

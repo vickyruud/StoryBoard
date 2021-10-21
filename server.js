@@ -1,6 +1,7 @@
 // load .env data into process.env
 require("dotenv").config();
 const database = require("./database");
+const loginRoute = require("./routes/loginRoute")
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -57,16 +58,20 @@ app.use("/api/stories", storiesRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {user : undefined};
+  res.render("index", templateVars);
 });
 app.get("/login", (req, res) => {
   res.render("login");
 });
 app.post("/login", (req, res) => {
-  const user = database.getUserWithEmail(req.body.email);
+  const user = loginRoute(req.body.email)
+  console.log(user);
   if (user) {
+    console.log(user);
     req.session.user_Id = user.id;
     const templateVars={user:user};
+    console.log(templateVars);
     res.render("index",templateVars);
   } else {
     res.statusCode = 400;
