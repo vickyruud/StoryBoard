@@ -16,27 +16,32 @@ module.exports = (db) => {
 
   const login = function (email, password) {
     return database.getUserWithEmail(email).then((user) => {   
-      if (user.password === password) {
+      if (email === user.email && user.password === password) {
         return user;
+      } else {
+        return null
       }
-      return null;
+      
     });
   };
+  exports.login = login;
 
   router.post('/', (req, res) => {
-    const user = login(req.body.email, req.body.password)
-    console.log(`from route post:`, req.body.email);
-    if (user) {
-      console.log('this is from the if statement',user)
-      req.session.userId = user.id;
-      const templateVars= {user: user};
-      res.render("index",templateVars);
-    } else {
-      alert("Incorrect username/password");
-      res.render("login");
-    }
+    const {email, password} = req.body;
+    login(email, password).then(user => {
+      if (!user) {
+        res.send('Incorrect email/password');
+        return;
+      } else {
+          console.log(`from if statement`,req.session)
+          req.session.userId = user.id;
+          const templateVars= {user: user};
+          res.render("index",templateVars);
+      }
+
+    })
+    .catch(e => res.send('Incorrect email/password'));
   });
 
-  exports.login = login;
   return router;
 };
