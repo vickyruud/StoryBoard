@@ -19,7 +19,7 @@ module.exports = (db) => {
   //fetches the user from the database based on the email
   const login = function (email, password) {
     return database.getUserWithEmail(email).then((user) => {   
-      if (email === user.email && user.password === password) {
+      if (email === user.email && password === user.password) {
         return user;
       } else {
         return null
@@ -30,12 +30,13 @@ module.exports = (db) => {
   exports.login = login;
   let templateVars = {};
 
-  //if the user exists it lets them login
+  //the post function calls the login function above and checks if user exists
+  // if the user exists then it renders the page else gives error
   router.post('/', (req, res) => {
-    const {email, password} = req.body;
+    const {email, password} = req.body; 
     login(email, password).then(user => {
       if (user) {
-        req.session.user_id = user.id;
+        req.session.userId = user.id;
         templateVars = {user: user};
         res.render('index', templateVars);
         } else {

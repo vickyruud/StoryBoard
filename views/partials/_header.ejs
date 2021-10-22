@@ -13,10 +13,10 @@
     <% if (!user) { %>
       <div>
         <a class="btn btn-primary" href="api/login">Login</a>
-        <a class="btn btn-primary" href="/register">Register</a>
+        <a class="btn btn-primary" href="api/register">Register</a>
       </div>
     <% } else { %>
-    <form class="form-inline" action="/logout" method="POST">
+    <form class="form-inline" action="api/logout" method="POST">
       <div>
         Logged in as: <%= user.email %>
         <button type="submit" class="btn btn-outline-primary">Logout</button>

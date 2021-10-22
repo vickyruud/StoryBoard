@@ -15,7 +15,6 @@ const pool = new Pool({
     `SELECT * FROM users
     WHERE users.email = $1;`, [email])
     .then(res => {
-      console.log(`from database.js: `, res.rows[0]);
       return res.rows[0];
     });
 };
