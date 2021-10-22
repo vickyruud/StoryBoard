@@ -23,7 +23,7 @@ app.use(morgan("dev"));
 app.use(
   cookieSession({
     name: "session",
-    secret: "happy-light",
+    keys: ['key1', 'key2'],
   })
   );
   
