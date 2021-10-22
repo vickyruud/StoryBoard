@@ -16,7 +16,7 @@ module.exports = (db) => {
    res.render('login');
   });
 
-  //retrieves user with email address from database
+  //fetches the user from the database based on the email
   const login = function (email, password) {
     return database.getUserWithEmail(email).then((user) => {   
       if (email === user.email && user.password === password) {
@@ -29,21 +29,21 @@ module.exports = (db) => {
   };
   exports.login = login;
 
-  //logs the user in and sets the cookies
+  //if the user exists it lets them login
   router.post('/', (req, res) => {
     const {email, password} = req.body;
     login(email, password).then(user => {
-      if (!user) {
-        res.send('Incorrect email/password!');
-        return;
+      if (user) {
+        req.session.userId = user.id;
+        console.log(`from if statement`,req.session)
+        const templateVars= {user: user};
+        res.render("index",templateVars);
       } else {
-          req.session.userId = user.id;
-          const templateVars= {user: user};
-          res.render("index",templateVars);
+        res.send("Incorrect username/password"); 
       }
 
     })
-    .catch(e => res.send('Incorrect email/password!'));
+    .catch(e => res.send('Incorrect username/password'));
   });
 
   return router;
