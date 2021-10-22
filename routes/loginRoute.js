@@ -13,6 +13,7 @@ module.exports = (db) => {
 
   //renders the login page
   router.get("/", (req, res) => {
+  const templateVars = {user: undefined};
    res.render('login');
   });
 
@@ -28,7 +29,6 @@ module.exports = (db) => {
     });
   };
   exports.login = login;
-  let templateVars = {};
 
   //the post function calls the login function above and checks if user exists
   // if the user exists then it renders the page else gives error
@@ -37,14 +37,20 @@ module.exports = (db) => {
     login(email, password).then(user => {
       if (user) {
         req.session.userId = user.id;
+        req.session.user = user;
         templateVars = {user: user};
-        res.render('index', templateVars);
+        res.redirect('/');
         } else {
         res.send("Incorrect username/password"); 
       }
 
     })
     .catch(e => res.send(e));
+  });
+
+  router.post('login/logout', (req, res) => {
+    req.session = null;
+    res.redirect('/');
   });
 
   return router;
