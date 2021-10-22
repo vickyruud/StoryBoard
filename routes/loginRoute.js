@@ -34,7 +34,7 @@ module.exports = (db) => {
     const {email, password} = req.body;
     login(email, password).then(user => {
       if (!user) {
-        res.send('Incorrect email/password');
+        res.send('Incorrect email/password!');
         return;
       } else {
           req.session.userId = user.id;
@@ -43,7 +43,7 @@ module.exports = (db) => {
       }
 
     })
-    .catch(e => res.send('Incorrect email/password'));
+    .catch(e => res.send('Incorrect email/password!'));
   });
 
   return router;
