@@ -28,22 +28,22 @@ module.exports = (db) => {
     });
   };
   exports.login = login;
+  let templateVars = {};
 
   //if the user exists it lets them login
   router.post('/', (req, res) => {
     const {email, password} = req.body;
     login(email, password).then(user => {
       if (user) {
-        req.session.userId = user.id;
-        console.log(`from if statement`,req.session)
-        const templateVars= {user: user};
-        res.render("index",templateVars);
-      } else {
+        req.session.user_id = user.id;
+        templateVars = {user: user};
+        res.render('index', templateVars);
+        } else {
         res.send("Incorrect username/password"); 
       }
 
     })
-    .catch(e => res.send('Incorrect username/password'));
+    .catch(e => res.send(e));
   });
 
   return router;
