@@ -4,27 +4,25 @@
  *   these routes are mounted onto /widgets
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-/*
+
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `
-    SELECT title, users.name as author, status, LEFT(contents,100) as contents
-    FROM stories
-    JOIN users ON users.id = stories.author_id;
-    `;
+    const query = `
+      SELECT title, users.name as author, status, LEFT(contents,100) as contents
+      FROM stories
+      JOIN users ON users.id = stories.author_id
+      WHERE users.name = $1;
+      `;
+    const user = req.session.userId;
     console.log(query);
-    db.query(query)
+    db.query(query, [user])
       .then(data => {
         const stories = data.rows;
-        let user = undefined;
-        if (req.session.userId) {
-          user = req.session.userId;
-        }
         const templateVars = {user, stories};
-        console.log('story list loaded');
+        console.log('my stories are loaded');
         res.render("index", templateVars);
       })
       .catch(err => {
@@ -33,6 +31,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
   return router;
 };
-*/

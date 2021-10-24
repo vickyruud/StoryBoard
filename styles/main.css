@@ -30,4 +30,8 @@ article {
   justify-content: space-between;
 }
 
+.story-listing__previews__details {
+  height: fit-content;
+}
+
 /*# sourceMappingURL=main.css.map */
