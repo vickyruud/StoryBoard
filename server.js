@@ -45,15 +45,13 @@ app.use(
     // Note: Feel free to replace the example routes below with your own
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
-    const storiesRoutes = require("./routes/stories");
-    //const getAllStories = require("./routes/stories");
-//const loadAllStories = require("./routes/stories");
+    const logout = require("./routes/logout");
 
     // Mount all resource routes
     // Note: Feel free to replace the example routes below with your own
     app.use("/api/users", usersRoutes(db));
-    //app.use("/api/stories", storiesRoutes(db));
     app.use("/api/login", loginRoute(db));
+    app.use("/api/logout", logout());
     // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -68,11 +66,11 @@ app.get("/", (req, res) => {
   `)
   .then((result) => {
     let user = undefined;
+    console.log(req.session.userId);
     if (req.session.userId) {
       user = req.session.userId;
     }
     const templateVars = {user, stories: result.rows};
-    console.log('connection started');
     res.render("index", templateVars);
   })
   .catch((error) => {

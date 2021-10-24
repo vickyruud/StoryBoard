@@ -37,20 +37,7 @@ module.exports = (db) => {
     login(email, password).then(user => {
       if (user) {
         req.session.userId = user.name;
-        db.query (`
-          SELECT title, users.name as author, status, LEFT(contents,100) as contents
-          FROM stories
-          JOIN users ON users.id = stories.author_id;
-        `)
-        .then((result) => {
-          const templateVars = {user : user, stories: result.rows};
-          console.log('connection started');
-          res.render("index", templateVars);
-        })
-        .catch((error) => {
-          console.log(error);
-          res.send(error);
-        })
+        res.redirect('/');
       } else {
         res.send("Incorrect username/password");
       }
