@@ -45,12 +45,14 @@ app.use(
     // Note: Feel free to replace the example routes below with your own
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
-    const storiesRoutes = require("./routes/stories")
+    const storiesRoutes = require("./routes/stories");
+    //const getAllStories = require("./routes/stories");
+//const loadAllStories = require("./routes/stories");
 
     // Mount all resource routes
     // Note: Feel free to replace the example routes below with your own
     app.use("/api/users", usersRoutes(db));
-    app.use("/api/stories", storiesRoutes(db));
+    //app.use("/api/stories", storiesRoutes(db));
     app.use("/api/login", loginRoute(db));
     // Note: mount other resources here, using the same pattern above
 
@@ -65,14 +67,21 @@ app.get("/", (req, res) => {
     JOIN users ON users.id = stories.author_id;
   `)
   .then((result) => {
-    const templateVars = {user : undefined, stories: result.rows};
+    let user = undefined;
+    if (req.session.userId) {
+      user = req.session.userId;
+    }
+    const templateVars = {user, stories: result.rows};
     console.log('connection started');
     res.render("index", templateVars);
   })
   .catch((error) => {
-    console.log(error);
-    res.send(error);
+    console.log(error.message);
+    res
+      .status(500)
+      .json({ error: error.message });
   })
+
 });
 
 app.listen(PORT, () => {
