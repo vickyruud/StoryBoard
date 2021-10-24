@@ -5,32 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" crossorigin="anonymous">
+   <!-- App CSS -->
+   <link rel="stylesheet" href="./styles/layout.css" type="text/css" />
+   <link rel="stylesheet" href="./styles/main.css" type="text/css" />
+
   <title>StoryBoard</title>
 </head>
 <body>
   <%- include('partials/_header') %>
-  <main class="container">
+  <main>
     <section class="story-box">
-      <ul>
-       <a href= "/api/users"> <li>story1</li></a>
-       <a href= "#"> <li>story2</li></a>
-       <a href= "#"> <li>story3</li></a>
-       <a href= "#"> <li>story4</li></a>
-       <a href= "#"> <li>story5</li></a>
-
-
-      </ul>
-
-
-
-
+      <% for (let i = stories.length - 1; i >= 0; i--) { %>
+        <article class="story-listing">
+          <section class="story-listing__preview">
+            <div class = "story-listing__previews__header">
+              <h4 class="story-listing__title"> <%= stories[i].title %> </h4>
+              <h6 class="story-listing__author"> By: <%= stories[i].author %> </h6>
+              <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
+            </div>
+            <textarea class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
+          </section>
+        </article>
+      <% } %>
     </section>
-
   </main>
-
-
-
-
 </body>
 </html>

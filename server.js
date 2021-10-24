@@ -26,10 +26,10 @@ app.use(
     keys: ['key1', 'key2'],
   })
   );
-  
+
   app.set("view engine", "ejs");
   app.use(express.urlencoded({ extended: true }));
-  
+
   app.use(
     "/styles",
     sassMiddleware({
@@ -38,15 +38,15 @@ app.use(
       isSass: false, // false => scss, true => sass
     })
     );
-    
+
     app.use(express.static("public"));
-    
+
     // Separated Routes for each Resource
     // Note: Feel free to replace the example routes below with your own
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
     const storiesRoutes = require("./routes/stories")
-    
+
     // Mount all resource routes
     // Note: Feel free to replace the example routes below with your own
     app.use("/api/users", usersRoutes(db));
@@ -59,8 +59,20 @@ app.use(
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  const templateVars = {user : undefined};
-  res.render("index", templateVars);
+  db.query (`
+    SELECT title, users.name as author, status, LEFT(contents,100) as contents
+    FROM stories
+    JOIN users ON users.id = stories.author_id;
+  `)
+  .then((result) => {
+    const templateVars = {user : undefined, stories: result.rows};
+    console.log('connection started');
+    res.render("index", templateVars);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.send(error);
+  })
 });
 
 app.listen(PORT, () => {
