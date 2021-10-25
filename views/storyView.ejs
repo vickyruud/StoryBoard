@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles/storyStyle.css" type="text/css"/>
+    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+    <title>Story View</title>
+  </head>
+  <body>
+    <%- include('partials/_header') %>
+      <div>
+        <h3><%= story.title %></h3>
+        <h4>Author: <%= story.name %></h4>
+        <h5>Status: <%= story.status %></h5>
+
+      </div>
+      <section>
+        <div class= "story-text">
+          <%= story.contents %>
+        </div>
+        <div>
+          <textarea class= "your-contribution"  placeholder = "Your contribution... "rows="6" cols="50"></textarea>
+          </div>
+
+          <div class = "contributions-container">
+            contributions show here
+
+            <div class = "contributions-footer"> </div>
+          </div>
+
+          </div>
+      </section>
+    
+  </body>
+</html>
