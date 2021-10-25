@@ -48,7 +48,6 @@ app.use(
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
     const storiesRoutes = require("./routes/stories");
-const logout = require("./routes/logout");
     const logout = require("./routes/logout");
     const storyView = require("./routes/storyview")
 
