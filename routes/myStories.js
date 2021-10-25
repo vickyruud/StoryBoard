@@ -10,12 +10,20 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM stories`;
+    const query = `
+      SELECT title, users.name as author, status, LEFT(contents,100) as contents
+      FROM stories
+      JOIN users ON users.id = stories.author_id
+      WHERE users.name = $1;
+      `;
+    const user = req.session.userId;
     console.log(query);
-    db.query(query)
+    db.query(query, [user])
       .then(data => {
         const stories = data.rows;
-        res.json({ stories });
+        const templateVars = {user, stories};
+        console.log('my stories are loaded');
+        res.render("index", templateVars);
       })
       .catch(err => {
         res
@@ -23,5 +31,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
   return router;
 };

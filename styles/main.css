@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: stretch;
   min-height: 100vh;
-  background: rgb(200, 203, 204);
+  background: #c8cbcc;
 }
 
 article {
@@ -20,14 +20,18 @@ article {
 
 .story-listing__preview {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: stretch;
 }
+
 .story-listing__previews__header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .story-listing__previews__details {
   height: fit-content;
 }
+
+/*# sourceMappingURL=main.css.map */
