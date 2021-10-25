@@ -1,5 +1,7 @@
 // load .env data into process.env
-require("dotenv").config();
+require("dotenv").config();// to check with Mahsa on Monday about dotenv or .env
+
+//calls the database file
 const database = require("./database");
 
 // Web server config
@@ -46,7 +48,8 @@ app.use(
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
     const storiesRoutes = require("./routes/stories");
-const logout = require("./routes/logout");
+    const logout = require("./routes/logout");
+    const storyView = require("./routes/storyview")
 
     const newstoryRoute = require("./routes/newstory");
 
@@ -54,9 +57,10 @@ const logout = require("./routes/logout");
     // Note: Feel free to replace the example routes below with your own
     app.use("/api/users", usersRoutes(db));
     app.use("/api/stories", storiesRoutes(db));
-    app.use("/api/login", loginRoute(db));
+    app.use("/api/login", loginRoute(db)); // ask Mahsa on monday about db
     app.use("/api/logout", logout(db));
     app.use("/api/newstory",newstoryRoute(db));
+    app.use("/api/story", storyView(db));
     // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -65,6 +69,9 @@ const logout = require("./routes/logout");
 
 app.get("/", (req, res) => {
   const templateVars = {user: req.session.user};
+
+
+
   res.render("index", templateVars);
 });
 
