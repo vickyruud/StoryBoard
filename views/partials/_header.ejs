@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <% if (user) { %>
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/api/mystories">My Stories</a>
+        <a class="nav-item nav-link" action = "api/mystories", method = "POST">My Stories</a>
         <a class="nav-item nav-link" href="/api/newstory">Create New Story</a>
       </div>
       <% } %>
@@ -18,10 +18,10 @@
         <a class="btn btn-primary" href="api/register">Register</a>
       </div>
     <% } else { %>
-    <form class="form-inline" action="api/logout" method="POST">
+    <form class="form-inline" action="/api/logout" method="POST">
       <div>
         <%= user.name %>
-        <button type="submit" class="btn btn-outline-primary" href="api/logout">Logout</button>
+        <button type="submit" class="btn btn-outline-primary">Logout</button>
       </div>
     </form>
     <% } %>
