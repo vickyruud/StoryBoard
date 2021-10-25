@@ -8,6 +8,7 @@
     "start": "node server.js",
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "db:reset": "node bin/resetdb.js"
+    
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
@@ -21,7 +22,7 @@
     "morgan": "^1.9.1",
     "pg": "^8.5.0",
     "pg-native": "^3.0.0",
-    "sass": "^1.35.1",
+    "sass": "^1.43.3",
     "session": "^0.1.0"
   },
   "devDependencies": {
