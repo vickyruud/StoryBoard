@@ -40,19 +40,15 @@ app.use(
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
     const logout = require("./routes/logout");
-    const storyView = require("./routes/storyview")
     const newstoryRoute = require("./routes/newstory");
     const myStories = require("./routes/myStories");
-    const storyDetails = require("./routes/storyDetails");
     // Mount all resource routes
     // Note: Feel free to replace the example routes below with your own
     app.use("/api/users", usersRoutes(db));
     app.use("/api/login", loginRoute(db)); // ask Mahsa on monday about db
     app.use("/api/logout", logout(db));
     app.use("/api/newstory",newstoryRoute(db));
-    app.use("/api/story", storyView(db));
     app.use("/api/mystories", myStories(db));
-    app.use("/api/storyDetails", storyDetails(db));
     // Note: mount other resources here, using the same pattern above
 // Home page
 // Warning: avoid creating more routes in this file!

@@ -22,15 +22,20 @@ module.exports = (db) => {
   // if the user exists then it renders the page else gives error
   router.post('/', (req, res) => {
     const {email, password} = req.body;
-    login(email, password).then(user => {
-      if (user) {
-        req.session.userId = user.name;
-        res.redirect('/');
-      } else {
-        res.send("Incorrect username/password");
-      }
-    })
-    .catch(e => res.send(e));
+    if (!email || !password) {
+      res.send("Emai and  Password cannot be empty");
+    } else {
+      login(email, password)
+      .then(user => {
+        if (user) {
+          req.session.userId = user;
+          res.redirect('/');
+        } else {
+          res.send("Incorrect username/password");
+        }
+      })
+      .catch(e => res.send(e));
+    };
   });
   return router;
 };

@@ -20,9 +20,8 @@
     <% } else { %>
     <form class="form-inline" action="api/logout" method="POST">
       <div>
-        <%= user %>
-        <% console.log('from headers:', user) %>
-        <button type="submit" class="btn btn-outline-primary">Logout</button>
+        <%= user.name %>
+        <button type="submit" class="btn btn-outline-primary" href="api/logout">Logout</button>
       </div>
     </form>
     <% } %>

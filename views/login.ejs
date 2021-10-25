@@ -1,16 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" crossorigin="anonymous">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="./styles/layout.css" type="text/css"/>
+    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
 
-  <form action= "/api/login" method = "POST" id="login-form" class="login-form">
-      <p>Login</p>
-      <div class="login-form__field-wrapper">
-        <input type="email" name="email" placeholder="Email">
-      </div>
-      <div class="login-form__field-wrapper">
-          <input type="password" name="password" placeholder="Password">
+    <title>StoryBoard</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-success">
+        <a class="navbar-brand" href="/">StoryBoard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         </div>
-      <div class="login-form__field-wrapper">
-          <button>Login</button>
-          <a id="login-form__cancel" href="#">Cancel</a>
-      </div>
-    </form>
-
+          <div>
+            <a class="btn btn-primary" href="api/register">Register</a>
+          </div>
+      </nav>
+    </header>
+    <main>
+      <form action= "/api/login" method = "POST" id="login-form" class="login-form">
+        <h1>Login</h1>
+        <div class="login-form__field-wrapper">
+          <input type="email" name="email" placeholder="Email">
+        </div>
+        <div class="login-form__field-wrapper">
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        <div class="login-form__field-wrapper">
+            <button class = "btn btn-primary">Login</button>
+            <a id="login-form__cancel" href="/"class="btn btn-outline-primary">Cancel</a>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
 

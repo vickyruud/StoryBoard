@@ -18,7 +18,7 @@ module.exports = (db) => {
       `;
     const user = req.session.userId;
     console.log(query);
-    db.query(query, [user])
+    db.query(query, [user.name])
       .then(data => {
         const stories = data.rows;
         const templateVars = {user, stories};
