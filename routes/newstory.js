@@ -12,8 +12,9 @@ module.exports = (db) => {
   });
   router.post("/", (req, res) => {
     const userId = req.session.userId;
+    console.log(userId);
     database
-      .insertNewStory({ ...req.body, author_id: userId })
+      .insertNewStory({ ...req.body, author_id: userId.id })
       .then((newStory) => {
         res.redirect('/');
       })
