@@ -24,7 +24,7 @@ module.exports = (db) => {
     const {email, password} = req.body;
     login(email, password).then(user => {
       if (user) {
-        req.session.userId = user.name;
+        req.session.userId = user;
         res.redirect('/');
       } else {
         res.send("Incorrect username/password");
