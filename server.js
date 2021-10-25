@@ -48,11 +48,11 @@ app.use(
     const usersRoutes = require("./routes/users");
     const loginRoute = require("./routes/loginRoute");
     const storiesRoutes = require("./routes/stories");
-const logout = require("./routes/logout");
     const logout = require("./routes/logout");
     const storyView = require("./routes/storyview")
-
     const newstoryRoute = require("./routes/newstory");
+    const myStories = require("./routes/myStories");
+    const storyDetails = require("./routes/storyDetails");
 
     // Mount all resource routes
     // Note: Feel free to replace the example routes below with your own
@@ -62,6 +62,8 @@ const logout = require("./routes/logout");
     app.use("/api/logout", logout(db));
     app.use("/api/newstory",newstoryRoute(db));
     app.use("/api/story", storyView(db));
+    app.use("/api/mystories", myStories(db));
+    app.use("/api/storyDetails", storyDetails(db));
     // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -69,11 +71,27 @@ const logout = require("./routes/logout");
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  const templateVars = {user: req.session.user};
+  db.query (`
+    SELECT title, users.name as author, status, LEFT(contents,100) as contents
+    FROM stories
+    JOIN users ON users.id = stories.author_id;
+  `)
+  .then((result) => {
+    let user = undefined;
+    console.log(req.session.userId);
+    if (req.session.userId) {
+      user = req.session.userId;
+    }
+    const templateVars = {user, stories: result.rows};
+    res.render("index", templateVars);
+  })
+  .catch((error) => {
+    console.log(error.message);
+    res
+      .status(500)
+      .json({ error: error.message });
+  })
 
-
-
-  res.render("index", templateVars);
 });
 
 app.listen(PORT, () => {
