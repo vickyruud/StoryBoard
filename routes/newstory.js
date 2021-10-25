@@ -15,7 +15,7 @@ module.exports = (db) => {
     database
       .insertNewStory({ ...req.body, author_id: userId })
       .then((newStory) => {
-        res.send(newStory);
+        res.redirect('/');
       })
       .catch((e) => res.send(e));
   });
