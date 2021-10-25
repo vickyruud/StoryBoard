@@ -7,11 +7,29 @@
 
 const express = require('express');
 const router  = express.Router();
+const database = require('../database');
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    templateVars = {user: null};
-   res.render("storyView", templateVars);
+  router.get("/:id", (req, res) => {
+    const storyId = req.params.id;
+    const user = req.session.userId;
+    console.log('this is from router : ',user)
+    return database.getStory(storyId)
+    .then(story => {
+        const templateVars = {story, user};
+        res.render('storyView', templateVars)
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res
+          .status(500)
+          .json({ error: error.message });
+      })
+   
   });
+ 
+
+
   return router;
+
 };
