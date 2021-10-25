@@ -47,7 +47,6 @@ app.use(
     const loginRoute = require("./routes/loginRoute");
     const storiesRoutes = require("./routes/stories");
 const logout = require("./routes/logout");
-
     const newstoryRoute = require("./routes/newstory");
 
     // Mount all resource routes
