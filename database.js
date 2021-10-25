@@ -42,5 +42,14 @@ const insertNewStory = function (
     });
 };
 
+const getStory = function (storyId) {
+  const queryString = `SELECT title, author_id, users.name, stories.status, stories.contents 
+  FROM stories JOIN users on users.id = stories.author_id
+  WHERE stories.id = $1`
+  return pool.query (queryString, [storyId])
+    .then(res => res.rows[0]);
+}
+
+exports.getStory = getStory;
 exports.getUserWithEmail = getUserWithEmail;
 exports.insertNewStory = insertNewStory;
