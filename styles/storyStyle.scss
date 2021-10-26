@@ -1,5 +1,10 @@
 @import './variables';
 
+body{
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
 .story-text{
   border : 500px;
   ;
