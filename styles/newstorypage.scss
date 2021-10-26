@@ -8,9 +8,9 @@ body
    align-items: stretch;
    background: $backgroundColor;
  }
-::placeholder {
-  padding-top: 0.5em;
-}
+// ::placeholder.big-box {
+//   padding-top: 50px;
+// }
 div.story-wrapper{
   margin-top: 2em;
   margin-right: 2em;
@@ -18,3 +18,13 @@ div.story-wrapper{
   justify-content: space-between;
 
 }
+.big-box{
+  border: 1px;
+  width: 50%;
+  height: 300px;
+  padding-top: 10px;
+ }
+
+
+
+

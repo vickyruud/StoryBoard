@@ -44,19 +44,18 @@
           </div>
           <br /><br />
           <div>
-            <textarea
+            <textarea class="big-box"
               id="contents"
               name="contents"
-              placeholder="Story "
-              rows="15"
-              cols="85"
+              placeholder="Story"
+
             ></textarea>
-          </div>
-          <div>Author Status:</div>
+
+          <div>Author : <%=user.name%></div>
           <div class="story-wrapper">
             <input type="submit" value="Submit" />
 
-            <button type="button" onclick="clearArea();">clear</button>
+            <button type="button" onclick="clearArea()">clear</button>
           </div>
         </form>
       </section>
