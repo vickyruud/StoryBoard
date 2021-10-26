@@ -23,7 +23,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.send("Emai and  Password cannot be empty");
+      res.send("Email and  Password cannot be empty");
     } else {
       login(email, password)
         .then((user) => {

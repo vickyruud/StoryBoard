@@ -6,7 +6,7 @@ module.exports = (db) => {
   //renders the newstory page
   let templateVars = {};
   router.get("/", (req, res) => {
-    const user = req.session.user;
+    const user = req.session.userId;
     templateVars = { user: user };
     res.render("newstory", templateVars);
   });

@@ -8,14 +8,14 @@
     />
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./styles/storyStyle.css" type="text/css"/>
-    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../styles/storyStyle.css" >
+    <link rel="stylesheet" type="text/css" href="../../styles/layout.css" >
+    <link rel="stylesheet" type="text/css" href="../../styles/main.css" >
+
+     <!-- Font Awesome-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Story View</title>
   </head>
   <body>
@@ -31,13 +31,16 @@
           <%= story.contents %>
         </div>
         <div>
+          <a class="btn btn-primary" id = "add-contribution">Contribute</a>
           <textarea class= "your-contribution"  placeholder = "Your contribution... "rows="6" cols="50"></textarea>
           </div>
 
           <div class = "contributions-container">
-            contributions show here
-
-            <div class = "contributions-footer"> </div>
+            <div><%= story.contribution_text %></div>
+              <div class = "contributions-footer">
+              <div> <i id="heart" class="fas fa-heart"></i> <%= story.contributions_votes %> <%= story.contribution_status %> <%= story.contributor_id %></div>
+            </div>
+              
           </div>
 
           </div>

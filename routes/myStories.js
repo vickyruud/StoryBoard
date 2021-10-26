@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const query = `
-      SELECT title, users.name as author, status, LEFT(contents,100) as contents
+      SELECT title, users.name as author, status, LEFT(contents,100) as contents, stories.id
       FROM stories
       JOIN users ON users.id = stories.author_id
       WHERE users.name = $1;
