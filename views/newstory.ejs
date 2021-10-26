@@ -17,14 +17,13 @@
     <link rel="stylesheet" href="/styles/newstorypage.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
-
     <title>newstory</title>
   </head>
   <body>
     <%- include('partials/_header') %>
-    <main>
-      <div>
-        <h3>StoryBoard - Power of Collaborative Imagination</h3>
+    <main style="margin: 1.5em">
+      <div class="header">
+        <h3>StoryBoard-power of collaborative imagination</h3>
       </div>
       <section>
         <form
@@ -44,22 +43,24 @@
           </div>
           <br /><br />
           <div>
-            <textarea
+            <textarea class="big-box"
               id="contents"
               name="contents"
-              placeholder="Story "
-              rows="15"
-              cols="85"
+              placeholder="Story"
             ></textarea>
-          </div>
-          <div>Author Status:</div>
+          <div>Author : <%=user.name%></div>
           <div class="story-wrapper">
             <input type="submit" value="Submit" />
-
-            <button type="button" onclick="clearArea();">clear</button>
+            <button type="button" onclick="clearArea()">clear</button>
           </div>
         </form>
       </section>
     </main>
   </body>
 </html>
+
+
+
+
+
+
