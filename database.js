@@ -67,10 +67,4 @@ const getStoryAndContributions = function (storyId, user) {
 
 exports.getStoryAndContributions = getStoryAndContributions;
 
-const getContributions = function (storyId) {
-  const queryString = `SELECT * FROM contributions WHERE contributions.story_id = $1`
-  return pool.query(queryString, [storyId])
-    .then(res => console.log(res.rows));
-}
 
-exports.getContributions = getContributions;
