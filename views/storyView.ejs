@@ -20,15 +20,15 @@
   </head>
   <body>
     <%- include('partials/_header') %>
-      <div>
-        <h3><%= story.title %></h3>
-        <h4>Author: <%= story.name %></h4>
-        <h5>Status: <%= story.status %></h5>
+      <div><% console.log('this is from ejs:', story) %>
+        <h3><%= story[0].title %></h3>
+        <h4>Author: <%= story[0].name %></h4>
+        <h5>Status: <%= story[0].status %></h5>
 
       </div>
       <section>
         <div class= "story-text">
-          <%= story.contents %>
+          <%= story[0].contents %>
         </div>
         <div>
           <a class="btn btn-primary" id = "add-contribution">Contribute</a>
@@ -36,10 +36,12 @@
           </div>
 
           <div class = "contributions-container">
-            <div><%= story.contribution_text %></div>
+            <% for (let i = story.length - 1; i >= 0; i--) {%>
+            <div><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
-              <div> <i id="heart" class="fas fa-heart"></i> <%= story.contributions_votes %> <%= story.contribution_status %> <%= story.contributor_id %></div>
+              <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> <%= story[i].contributor_id %></div>
             </div>
+            <% } %>
               
           </div>
 
