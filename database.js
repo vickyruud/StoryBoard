@@ -48,7 +48,7 @@ const insertNewStory = function (
 };
 exports.insertNewStory = insertNewStory;
 
-const getStory = function (storyId) {
+const getStoryAndContributions = function (storyId, user) {
   const queryString = `SELECT stories.title, stories.author_id, users.name, stories.status, stories.contents,
   contributions.id as contribution_id, contributions.contribution_text as contribution_text,
   contributions.status as contribution_status,
@@ -59,15 +59,13 @@ const getStory = function (storyId) {
   JOIN users ON users.id = stories.author_id
   LEFT JOIN contributions ON stories.id = contributions.story_id
   WHERE stories.id = $1;`
-  console.log('from database:', storyId);
   return pool.query (queryString, [storyId])
     .then(res => {
-      console.log(res.rows[0]);
-      return res.rows[0];    
+      return res.rows;    
     });
 }
 
-exports.getStory = getStory;
+exports.getStoryAndContributions = getStoryAndContributions;
 
 const getContributions = function (storyId) {
   const queryString = `SELECT * FROM contributions WHERE contributions.story_id = $1`
