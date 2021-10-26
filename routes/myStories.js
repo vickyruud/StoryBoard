@@ -17,7 +17,6 @@ module.exports = (db) => {
       WHERE users.name = $1;
       `;
     const user = req.session.userId;
-    console.log(query);
     db.query(query, [user.name])
       .then(data => {
         const stories = data.rows;
