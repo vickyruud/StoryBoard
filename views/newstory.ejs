@@ -6,21 +6,24 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
+<!-- App JS -->
+<script type="text/javascript" src="/scripts/app.js"></script>
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/styles/newstorypage.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
 
     <title>newstory</title>
   </head>
   <body>
     <%- include('partials/_header') %>
-    <main style="margin: 1em">
-      <div>
+    <main style="margin: 1.5em">
+      <div class="header">
         <h3>StoryBoard-power of collaborative imagination</h3>
       </div>
       <section>
@@ -31,19 +34,29 @@
           class="story-title"
         >
           <div>
-            <textarea id="title" name="title" placeholder = "Title"rows="1" cols="50"></textarea>
+            <textarea
+              id="title"
+              name="title"
+              placeholder="Title"
+              rows="1"
+              cols="60"
+            ></textarea>
           </div>
-          <br/><br/>
+          <br /><br />
           <div>
-          <textarea id="contents" name="contents" placeholder = "Story "rows="10" cols="75"></textarea>
+            <textarea
+              id="contents"
+              name="contents"
+              placeholder="Story "
+              rows="15"
+              cols="85"
+            ></textarea>
           </div>
           <div>Author Status:</div>
-
           <div class="story-wrapper">
             <input type="submit" value="Submit" />
-          </div>
-          <div class="story-wrapper">
-            <input type="submit" value="Cancel" />
+
+            <button type="button" onclick="clearArea();">clear</button>
           </div>
         </form>
       </section>

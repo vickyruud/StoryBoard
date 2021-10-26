@@ -12,10 +12,12 @@ const database = require('../database');
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const storyId = req.params.id;
+    console.log(storyId);
     const user = req.session.userId;
     console.log('this is from router : ',user)
     return database.getStory(storyId)
     .then(story => {
+      console.log("This is our story---",story);
         const templateVars = {story, user};
         res.render('storyView', templateVars)
       })
@@ -25,9 +27,9 @@ module.exports = (db) => {
           .status(500)
           .json({ error: error.message });
       })
-   
+
   });
- 
+
 
 
   return router;
