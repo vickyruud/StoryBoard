@@ -1,10 +1,14 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: stretch;
   min-height: 100vh;
   background: #c8cbcc;
+}
+
+.slogan {
+  margin-left: 1.5em;
+  padding-top: 4.5em;
 }
 
 article {
