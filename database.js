@@ -12,15 +12,20 @@ const pool = new Pool({
 
 const getUserWithEmail = function (email) {
   return pool
-    .query(
-      `SELECT * FROM users
+  .query(
+    `SELECT * FROM users
     WHERE users.email = $1;`,
-      [email]
+    [email]
     )
     .then((res) => {
       return res.rows[0];
     });
-};
+  };
+  
+exports.getUserWithEmail = getUserWithEmail;
+
+
+
 
 const insertNewStory = function (
   story
@@ -33,7 +38,7 @@ const insertNewStory = function (
     created_on,
     story.author_id];
   return pool
-    .query(queryString, values)
+  .query(queryString, values)
     .then((res) => {
       return res.rows;
     })
@@ -41,15 +46,31 @@ const insertNewStory = function (
       console.log(err.message);
     });
 };
+exports.insertNewStory = insertNewStory;
 
-const getStory = function (storyId) {
-  const queryString = `SELECT title, author_id, users.name, stories.status, stories.contents 
-  FROM stories JOIN users on users.id = stories.author_id
-  WHERE stories.id = $1`
+const getStoryAndContributions = function (storyId, user) {
+  const queryString = `SELECT stories.title, stories.author_id, users.name, stories.status, stories.contents,
+  contributions.id as contribution_id, contributions.contribution_text as contribution_text,
+  contributions.status as contribution_status,
+  contributions.created_on as contributions_date,
+  contributions.votes as contributions_votes,
+  contributions.contributor_id as contributor_id, contributions.story_id as contributions_story_id  
+  FROM stories
+  JOIN users ON users.id = stories.author_id
+  LEFT JOIN contributions ON stories.id = contributions.story_id
+  WHERE stories.id = $1;`
   return pool.query (queryString, [storyId])
-    .then(res => res.rows[0]);
+    .then(res => {
+      return res.rows;    
+    });
 }
 
-exports.getStory = getStory;
-exports.getUserWithEmail = getUserWithEmail;
-exports.insertNewStory = insertNewStory;
+exports.getStoryAndContributions = getStoryAndContributions;
+
+const getContributions = function (storyId) {
+  const queryString = `SELECT * FROM contributions WHERE contributions.story_id = $1`
+  return pool.query(queryString, [storyId])
+    .then(res => console.log(res.rows));
+}
+
+exports.getContributions = getContributions;

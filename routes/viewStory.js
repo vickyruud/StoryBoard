@@ -9,13 +9,14 @@ const express = require('express');
 const router  = express.Router();
 const database = require('../database');
 
+
 module.exports = (db) => {
+
+
   router.get("/:id", (req, res) => {
     const storyId = req.params.id;
-    console.log(storyId);
     const user = req.session.userId;
-    console.log('this is from router : ',user)
-    return database.getStory(storyId)
+    return database.getStoryAndContributions(storyId)
     .then(story => {
       console.log("This is our story---",story);
         const templateVars = {story, user};

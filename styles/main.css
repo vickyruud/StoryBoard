@@ -1,12 +1,9 @@
-@import './variables';
-
 body {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: stretch;
   min-height: 100vh;
-  background: $backgroundColor;
+  background: #c8cbcc;
 }
 
 .slogan {
@@ -27,16 +24,24 @@ article {
 
 .story-listing__preview {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: stretch;
 }
+
 .story-listing__previews__header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .story-listing__previews__details {
   height: fit-content;
 }
 
+.story-text {
+  border: 50px;
+  background-color: red;
+  color: aqua;
+}
 
+/*# sourceMappingURL=main.css.map */
