@@ -1,0 +1,20 @@
+@import './variables';
+
+body
+ {
+   display: flex;
+   flex-direction: row;
+   justify-content: left;
+   align-items: stretch;
+   background: $backgroundColor;
+ }
+::placeholder {
+  padding-top: 0.5em;
+}
+div.story-wrapper{
+  margin-top: 2em;
+  margin-right: 2em;
+  display: flex;
+  justify-content: space-between;
+
+}

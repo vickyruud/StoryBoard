@@ -7,8 +7,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" crossorigin="anonymous">
    <!-- App CSS -->
-   <link rel="stylesheet" href="./styles/layout.css" type="text/css"/>
-   <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+   <link rel="stylesheet" href="../styles/main.css" type="text/css"/>
+   <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
 
   <title>StoryBoard</title>
 </head>
@@ -23,11 +23,10 @@
               <h4 class="story-listing__title"> <%= stories[i].title %> </h4>
               <h6 class="story-listing__author"> By: <%= stories[i].author %> </h6>
               <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
-              <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-primary">View Story...</button></a>
+              <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-success btn-small">View Story...</button></a>
 
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
-            <p hidden class="story-listing__id"> <!--<%= stories[i].id %> --></p>
           </section>
         </article>
       <% } %>

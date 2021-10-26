@@ -18,11 +18,11 @@ module.exports = (db) => {
       `;
     const user = req.session.userId;
     console.log(query);
+    console.log(user);
     db.query(query, [user.name])
       .then(data => {
         const stories = data.rows;
         const templateVars = {user, stories};
-        console.log('my stories are loaded');
         res.render("index", templateVars);
       })
       .catch(err => {
