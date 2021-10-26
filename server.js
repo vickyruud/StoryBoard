@@ -1,5 +1,5 @@
 // load .env data into process.env
-require("dotenv").config();// to check with Mahsa on Monday about dotenv or .env
+require("dotenv").config(); // to check with Mahsa on Monday about dotenv or .env
 //calls the database file
 const database = require("./database");
 // Web server config
@@ -21,61 +21,61 @@ app.use(morgan("dev"));
 app.use(
   cookieSession({
     name: "session",
-    keys: ['key1', 'key2'],
+    keys: ["key1", "key2"],
   })
-  );
-  app.set("view engine", "ejs");
-  app.use(express.urlencoded({ extended: true }));
-  app.use(
-    "/styles",
-    sassMiddleware({
-      source: __dirname + "/styles",
-      destination: __dirname + "/public/styles",
-      isSass: false, // false => scss, true => sass
-    })
-    );
-    app.use(express.static("public"));
-    // Separated Routes for each Resource
-    // Note: Feel free to replace the example routes below with your own
-    const usersRoutes = require("./routes/users");
-    const loginRoute = require("./routes/loginRoute");
-    const logout = require("./routes/logout");
-    const newstoryRoute = require("./routes/newstory");
-    const myStories = require("./routes/myStories");
-    const viewStory = require("./routes/viewStory");
-    // Mount all resource routes
-    // Note: Feel free to replace the example routes below with your own
-    app.use("/api/users", usersRoutes(db));
-    app.use("/api/login", loginRoute(db)); // ask Mahsa on monday about db
-    app.use("/api/logout", logout(db));
-    app.use("/api/newstory",newstoryRoute(db));
-    app.use("/api/mystories", myStories(db));
-    app.use("/api/story", viewStory(db));
-    // Note: mount other resources here, using the same pattern above
+);
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  "/styles",
+  sassMiddleware({
+    source: __dirname + "/styles",
+    destination: __dirname + "/public/styles",
+    isSass: false, // false => scss, true => sass
+  })
+);
+app.use(express.static("public"));
+// Separated Routes for each Resource
+// Note: Feel free to replace the example routes below with your own
+const usersRoutes = require("./routes/users");
+const loginRoute = require("./routes/loginRoute");
+const logout = require("./routes/logout");
+const newstoryRoute = require("./routes/newstory");
+const myStories = require("./routes/myStories");
+const viewStory = require("./routes/viewStory");
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+app.use("/api/users", usersRoutes(db));
+app.use("/api/login", loginRoute(db)); // ask Mahsa on monday about db
+app.use("/api/logout", logout(db));
+app.use("/api/newstory", newstoryRoute(db));
+app.use("/api/mystories", myStories(db));
+app.use("/api/story", viewStory(db));
+// Note: mount other resources here, using the same pattern above
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  db.query (`
+  db.query(
+    `
     SELECT title, users.name as author, status,  LEFT(contents,100) as contents, stories.id
     FROM stories
     JOIN users ON users.id = stories.author_id;
-  `)
-  .then((result) => {
-    let user = undefined;
-    console.log(req.session.userId);
-    if (req.session.userId) {
-      user = req.session.userId;
-    }
-    const templateVars = {user, stories: result.rows};
-    res.render("index", templateVars);
-  })
-  .catch((error) => {
-    console.log(error.message);
-    res
-      .status(500)
-      .json({ error: error.message });
-  })
+  `
+  )
+    .then((result) => {
+      let user = undefined;
+      console.log(req.session.userId);
+      if (req.session.userId) {
+        user = req.session.userId;
+      }
+      const templateVars = { user, stories: result.rows };
+      res.render("index", templateVars);
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).json({ error: error.message });
+    });
 });
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
