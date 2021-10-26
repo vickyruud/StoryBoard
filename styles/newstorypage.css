@@ -6,15 +6,18 @@ body {
   background: #c8cbcc;
 }
 
-::placeholder {
-  padding-top: 0.5em;
-}
-
 div.story-wrapper {
   margin-top: 2em;
   margin-right: 2em;
   display: flex;
   justify-content: space-between;
+}
+
+.big-box {
+  border-radius: 0 !important;
+  width: 75%;
+  height: 300px;
+  padding-top: 10px;
 }
 
 /*# sourceMappingURL=newstorypage.css.map */
