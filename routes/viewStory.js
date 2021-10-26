@@ -18,8 +18,14 @@ module.exports = (db) => {
     const user = req.session.userId;
     return database.getStoryAndContributions(storyId)
     .then(story => {
+<<<<<<< HEAD
       const templateVars = {story, user};
       res.render('storyView', templateVars);
+=======
+      console.log("This is our story---",story);
+        const templateVars = {story, user};
+        res.render('storyView', templateVars)
+>>>>>>> 28a1d0f1971d88c9e8f296acf12540bd8f4c0ab0
       })
       .catch((error) => {
         console.log(error.message);
@@ -27,9 +33,9 @@ module.exports = (db) => {
           .status(500)
           .json({ error: error.message });
       })
-   
+
   });
- 
+
 
 
   return router;

@@ -9,12 +9,16 @@
    <!-- App CSS -->
    <link rel="stylesheet" href="../styles/main.css" type="text/css"/>
    <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
+   <link rel="stylesheet" href="../styles/header.css" type="text/css"/>
 
   <title>StoryBoard</title>
 </head>
 <body>
   <%- include('partials/_header') %>
   <main>
+    <div class="slogan">
+      <h3>StoryBoard-power of collaborative imagination</h3>
+    </div>
     <section class="story-box">
       <% for (let i = stories.length - 1; i >= 0; i--) { %>
         <article class="story-listing">
