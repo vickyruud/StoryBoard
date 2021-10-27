@@ -21,6 +21,8 @@ module.exports = (db) => {
     return database.getStoryAndContributions(storyId)
     .then(story => {
       const templateVars = {story, user};
+      console.log('user:', user)
+      console.log('Story:', story[0])
       res.render('storyView', templateVars);
       })
       .catch((error) => {
@@ -32,7 +34,7 @@ module.exports = (db) => {
 
   });
 
-  router.post("/", (req,res) => {
+  router.post("/:id", (req,res) => {
     const user = req.session.userId;
     if (req.body.yourContribution === "") {
       return res.redirect('back');

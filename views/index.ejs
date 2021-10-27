@@ -10,15 +10,19 @@
    <link rel="stylesheet" href="../styles/main.css" type="text/css"/>
    <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
    <link rel="stylesheet" href="../styles/header.css" type="text/css"/>
+   <link rel="stylesheet" href="../styles/homepage.css" type="text/css"/>
 
   <title>StoryBoard</title>
 </head>
 <body>
   <%- include('partials/_header') %>
   <main>
+<<<<<<< HEAD
     <div class="slogan">
       <!-- <h3>StoryBoard-power of collaborative imagination</h3> -->
     </div>
+=======
+>>>>>>> 564bf8bf5f3a908c3a372168ae2af6892903e7ad
     <section class="story-box">
       <% for (let i = stories.length - 1; i >= 0; i--) { %>
         <article class="story-listing">
@@ -29,16 +33,19 @@
               <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
-            <div class = "preview-action">
-              <% if (user) { %>
-                <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
-                  <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">Edit</button></a>
-                  <a href="/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
-                <% } else { %>
-                  <a href="/story/<%= stories[i].id %>"><button class= "btn btn-warning"id="view-button">View</button></a>
-                <% } } else { %>
-                  <a href="/story/<%= stories[i].id %>"><button class = "btn btn-warning" id ="click-button">View</button></a>
-                <% } %>
+            <div class = "preview-info">
+              <label class="text-secondary"> <%=stories[i].contributions_count %> <%=stories[i].contributions_count > 1 ? "Contributions" : "Contribution" %> </label>
+              <div class = "preview-action">
+                <% if (user) { %>
+                  <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
+                    <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">Edit</button></a>
+                    <a href="/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
+                  <% } else { %>
+                    <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">View</button></a>
+                  <% } } else { %>
+                    <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">View</button></a>
+                  <% } %>
+              </div>
             </div>
           </div>
           </section>

@@ -25,10 +25,12 @@
     <%- include('partials/_header') %>
     <main>
         <h5>Status: <%= story[0].status %></h5>
-        <% if (story[0].author_id === user.id && story[0].status === "In Progress") { %>
+        <% if (user) { %>
+        <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>
           <form action = "/story/<%= story[0].id %>/edit" method = 'POST'>
             <button > Mark Complete</button>
           </form>
+          <% } %>
           <% } %>
       <section>
           <div id="storyHolder" class="card text-white bg-secondary mb-3">
@@ -38,6 +40,7 @@
               <p class="card-text"><%= story[0].contents %></p>
             </div>
         </div>
+        <% if (story[0].status !== 'Completed') {%>
         <div>
           <button type="button" onclick="showContributionBox();">Contribute</button>
         </div>
@@ -52,13 +55,25 @@
           <button type="button" onclick="clearContribution(); hideContributionBox();">Cancel</button>
         </div>
         </form>
-          <div class = "contributions-container">
+      <% } %>
+          <div class = "container">
             <% for (let i = story.length - 1; i >= 0; i--) {%>  
-              <%if(story[0].contribution_id){ %>
-            <div><%= story[i].contribution_text %></div>
+              <%if(story[0].contribution_id){ %>      
+          <div class = "contributions-container">
+            <div class="contribution-text"><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
-              <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %></div>
+              <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %>
+                <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>                  
+                    <form action = "/story/<%= story[0].id %>/approve" method = 'POST'>
+                      <button class="btn btn-outline-success"> Approve</button>
+                    </form>
+                    <form action = "/story/<%= story[0].id %>/delete" method = 'POST'>
+                      <button class="btn btn-outline-danger"> Reject</button>
+                    </form>
+                  <% } %>
+              </div>
             </div>
+          </div>
             <% } else { %>
 
             <% } %>

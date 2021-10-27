@@ -1,0 +1,40 @@
+article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em;
+}
+
+.story_listing {
+  padding: 100em;
+}
+
+.story-listing__preview {
+  display: flex;
+  flex-direction:column;
+  justify-content: stretch;
+}
+.story-listing__previews__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.story-listing__previews__details {
+  height: fit-content;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.preview-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+
+}
+.btn-index {
+  background-color: white;
+}
