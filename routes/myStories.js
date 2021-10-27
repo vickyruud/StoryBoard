@@ -17,12 +17,13 @@ module.exports = (db) => {
       WHERE users.name = $1;
       `;
     const user = req.session.userId;
+    const view = 'myStories'
     console.log(query);
     console.log(user);
     db.query(query, [user.name])
       .then(data => {
         const stories = data.rows;
-        const templateVars = {user, stories};
+        const templateVars = {user, stories, view};
         res.render("index", templateVars);
       })
       .catch(err => {

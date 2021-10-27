@@ -69,7 +69,8 @@ app.get("/", (req, res) => {
       if (req.session.userId) {
         user = req.session.userId;
       }
-      const templateVars = { user, stories: result.rows };
+      let view = 'home';
+      const templateVars = { user, stories: result.rows, view };
       res.render("index", templateVars);
     })
     .catch((error) => {

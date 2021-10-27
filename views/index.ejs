@@ -30,14 +30,11 @@
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
             <div class = "preview-action">
-              <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-success">View</button></a>
-              <% if (user) { %>
-                <% if (stories[i].status.includes("In Progress")) { %>
-                  <% if (user.name === stories[i].author) { %>
-                    <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Edit</button></a>
-                    <a href="/api/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
-                  <% } %>
-                <% } %>
+              <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
+                <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-success">Edit</button></a>
+                <a href="/api/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
+              <% } else { %>
+                <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-success">View</button></a>
               <% } %>
             </div>
           </div>
