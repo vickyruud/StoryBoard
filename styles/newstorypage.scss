@@ -1,5 +1,4 @@
 @import './variables';
-
 body
  {
    display: flex;
@@ -8,13 +7,11 @@ body
    align-items: stretch;
    background: $backgroundColor;
  }
-
 div.story-wrapper{
   margin-top: 2em;
   margin-right: 2em;
   display: flex;
   justify-content: space-between;
-
 }
 .big-box{
   border-radius: 0 !important;
@@ -22,7 +19,3 @@ div.story-wrapper{
   height: 300px;
   padding-top: 10px;
  }
-
-
-
-

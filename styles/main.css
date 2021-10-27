@@ -7,8 +7,13 @@ body {
 }
 
 .slogan {
-  margin-left: 1.5em;
-  padding-top: 4.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
 }
 
 article {
@@ -38,10 +43,14 @@ article {
   height: fit-content;
 }
 
-.story-text {
-  border: 50px;
-  background-color: red;
-  color: aqua;
+.preview-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.btn-index {
+  background-color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
