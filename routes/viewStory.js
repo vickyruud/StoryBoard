@@ -44,7 +44,7 @@ module.exports = (db) => {
       .then(story => {
         database.addContribution(contributionText, contributorId, storyId)
           .then(result => {
-            res.redirect('back');
+            // res.redirect('back');
           })
       })
 

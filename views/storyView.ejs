@@ -51,7 +51,7 @@
         </div>
         </form>
           <div class = "contributions-container">
-            <% for (let i = story.length - 1; i >= 0; i--) {%>
+            <% for (let i = story.length - 1; i >= 0; i--) {%>  
             <div><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
               <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %></div>

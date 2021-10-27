@@ -60,6 +60,7 @@ const getStoryAndContributions = function (storyId, user) {
   WHERE stories.id = $1;`
   return pool.query (queryString, [storyId])
     .then(res => {
+      console.log(res.rows);
       return res.rows;    
     });
 }
