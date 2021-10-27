@@ -1,10 +1,12 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/">StoryBoard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <a class="navbar-brand" href="/">StoryBoard - The power of collaborative imagination</a>
+    <% if (user) { %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <% } %>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <% if (user) { %>
       <div class="navbar-nav">
         <a class="nav-item nav-link" href = "/api/mystories">My Stories</a>
