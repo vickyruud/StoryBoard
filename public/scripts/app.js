@@ -26,7 +26,6 @@ $(document).ready(() => {
   $("#cbtn").click(function (e) {
     event.preventDefault();
     clearArea();
-
   });
 
 });

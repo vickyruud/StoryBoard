@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
   )
     .then((result) => {
       let user = undefined;
-      console.log(req.session.userId);
+      console.log("This is user+++", req.session.userId);
       if (req.session.userId) {
         user = req.session.userId;
       }
