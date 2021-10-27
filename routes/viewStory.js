@@ -21,6 +21,8 @@ module.exports = (db) => {
     return database.getStoryAndContributions(storyId)
     .then(story => {
       const templateVars = {story, user};
+      console.log('user:', user)
+      console.log('Story:', story[0])
       res.render('storyView', templateVars);
       })
       .catch((error) => {

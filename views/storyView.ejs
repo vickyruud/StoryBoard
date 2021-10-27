@@ -38,6 +38,7 @@
               <p class="card-text"><%= story[0].contents %></p>
             </div>
         </div>
+        <% if (story[0].status === 'In Progress') {%>
         <div>
           <button type="button" onclick="showContributionBox();">Contribute</button>
         </div>
@@ -52,6 +53,7 @@
           <button type="button" onclick="clearContribution(); hideContributionBox();">Cancel</button>
         </div>
         </form>
+      <% } %>
           <div class = "contributions-container">
             <% for (let i = story.length - 1; i >= 0; i--) {%>  
               <%if(story[0].contribution_id){ %>
