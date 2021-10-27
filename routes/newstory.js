@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const database = require("../database");
-
 module.exports = (db) => {
   //renders the newstory page
   let templateVars = {};
@@ -22,6 +21,5 @@ module.exports = (db) => {
       })
       .catch((e) => res.send(e));
   });
-
   return router;
 };

@@ -1,5 +1,4 @@
 @import './variables';
-
 body
  {
    display: flex;
@@ -8,23 +7,15 @@ body
    align-items: stretch;
    background: $backgroundColor;
  }
-// ::placeholder.big-box {
-//   padding-top: 50px;
-// }
 div.story-wrapper{
   margin-top: 2em;
   margin-right: 2em;
   display: flex;
   justify-content: space-between;
-
 }
 .big-box{
-  border: 1px;
-  width: 50%;
+  border-radius: 0 !important;
+  width: 75%;
   height: 300px;
   padding-top: 10px;
  }
-
-
-
-

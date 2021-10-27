@@ -1,6 +1,23 @@
 @import './variables';
 
+body{
+  display: flex;
+  justify-content: stretch;
+}
+main{
+  padding-left: 10px;
+}
+
 .story-text{
   border : 500px;
-  ;
+
 }
+
+
+
+#yourContribution{
+  border-radius: 0 !important;
+  width: 300px;
+  height: 100px;
+  
+ }
