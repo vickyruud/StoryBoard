@@ -19,7 +19,7 @@ module.exports = (db) => {
     LEFT JOIN contributions ON stories.id = contributions.story_id
     WHERE users.name = $1
     GROUP BY stories.id, users.id
-    ORDER BY stories.id DESC;
+    ORDER BY stories.id;
     `;
     const user = req.session.userId;
     const view = 'myStories'
