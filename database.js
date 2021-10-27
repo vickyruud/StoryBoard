@@ -79,7 +79,7 @@ const addContribution = function (contribution, contributorId, storyId) {
 exports.addContribution = addContribution;
 
 const markStoryComplete = function (storyId) {
-  const queryString = `UPDATE stories SET status = 'Complete' WHERE stories.id = $1;`
+  const queryString = `UPDATE stories SET status = 'Completed' WHERE stories.id = $1;`
   return pool.query(queryString, [storyId])
     .then(res => res.rows)
     .catch((err) => console.log(err.message));

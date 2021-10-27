@@ -34,7 +34,7 @@ module.exports = (db) => {
 
   });
 
-  router.post("/", (req,res) => {
+  router.post("/:id", (req,res) => {
     const user = req.session.userId;
     if (req.body.yourContribution === "") {
       return res.redirect('back');

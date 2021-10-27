@@ -29,8 +29,6 @@
               <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
-<<<<<<< HEAD
-=======
             <div class = "preview-action">
               <% if (user) { %>
                 <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
@@ -43,7 +41,6 @@
                 <% } %>
             </div>
           </div>
->>>>>>> master
           </section>
         </article>
       <% } %>
