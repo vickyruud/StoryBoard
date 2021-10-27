@@ -21,7 +21,7 @@ const getUserWithEmail = function (email) {
       return res.rows[0];
     });
   };
-  
+
 exports.getUserWithEmail = getUserWithEmail;
 
 
@@ -53,14 +53,14 @@ const getStoryAndContributions = function (storyId, user) {
   contributions.status as contribution_status,
   contributions.created_on as contributions_date,
   contributions.votes as contributions_votes,
-  contributions.contributor_id as contributor_id, contributions.story_id as contributions_story_id  
+  contributions.contributor_id as contributor_id, contributions.story_id as contributions_story_id
   FROM stories
   JOIN users ON users.id = stories.author_id
   LEFT JOIN contributions ON stories.id = contributions.story_id
-  WHERE stories.id = $1;`
-  return pool.query (queryString, [storyId])
+  WHERE stories.id = $1;`;
+  return pool.query(queryString, [storyId])
     .then(res => {
-      return res.rows;    
+      return res.rows;
     });
 }
 
