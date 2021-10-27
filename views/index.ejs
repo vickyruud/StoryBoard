@@ -27,16 +27,17 @@
               <h4 class="story-listing__title"> <%= stories[i].title %> </h4>
               <h6 class="story-listing__author"> By: <%= stories[i].author %> </h6>
               <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
-              <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success btn-small">View Story...</button></a>
-
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>
             <div class = "preview-action">
-              <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
-                <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">Edit</button></a>
-                <a href="/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
-              <% } else { %>
-                <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success">View</button></a>
+              <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-warning" id="view-button">View</button></a>
+              <% if (user) { %>
+                <% if (stories[i].status.includes("In Progress")) { %>
+                  <% if (user.name === stories[i].author) { %>
+                    <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Edit</button></a>
+                    <a href="/api/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
+                  <% } %>
+                <% } %>
               <% } %>
             </div>
           </div>
