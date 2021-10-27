@@ -16,9 +16,10 @@ module.exports = (db) => {
     count(contributions.id) as contributions_count
     FROM stories
     JOIN users ON users.id = stories.author_id
-    JOIN contributions ON stories.id = contributions.story_id
+    LEFT JOIN contributions ON stories.id = contributions.story_id
     WHERE users.name = $1
-    GROUP BY stories.id, users.id;
+    GROUP BY stories.id, users.id
+    ORDER BY stories.id DESC;
     `;
     const user = req.session.userId;
     const view = 'myStories'

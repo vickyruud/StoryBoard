@@ -64,8 +64,9 @@ app.get("/", (req, res) => {
       count(contributions.id) as contributions_count
     FROM stories
     JOIN users ON users.id = stories.author_id
-    JOIN contributions ON stories.id = contributions.story_id
-    GROUP BY stories.id, users.id;
+    LEFT JOIN contributions ON stories.id = contributions.story_id
+    GROUP BY stories.id, users.id
+    ORDER BY stories.id;
     `
   )
     .then((result) => {
