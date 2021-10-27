@@ -11,7 +11,6 @@ module.exports = (db) => {
     db.query(query, [storyId])
       .then(() => {
         console.log(`story ${storyId} deleted`);
-
         res.redirect("back");
       })
       .catch(err => {

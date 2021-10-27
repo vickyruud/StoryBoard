@@ -11,7 +11,7 @@ body {
   flex-direction: column;
 }
 
-.nav-bar {
+nav {
   display: flex;
   flex-direction: row;
 }
@@ -41,6 +41,12 @@ article {
 
 .story-listing__previews__details {
   height: fit-content;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .preview-action {

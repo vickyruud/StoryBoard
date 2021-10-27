@@ -43,6 +43,13 @@ article {
 .story-listing__previews__details {
   height: fit-content;
 }
+
+.preview-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .preview-action {
   display: flex;
   flex-direction: row;

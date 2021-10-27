@@ -59,14 +59,17 @@ app.use("/deleteStory", deleteStory(db));
 app.get("/", (req, res) => {
   db.query(
     `
-    SELECT title, users.name as author, status,  LEFT(contents,100) as contents, stories.id
+    SELECT title, users.name as author, stories.status,
+      LEFT(contents,100) as contents, stories.id,
+      count(contributions.id) as contributions_count
     FROM stories
-    JOIN users ON users.id = stories.author_id;
-  `
+    JOIN users ON users.id = stories.author_id
+    JOIN contributions ON stories.id = contributions.story_id
+    GROUP BY stories.id, users.id;
+    `
   )
     .then((result) => {
       let user = undefined;
-      console.log("This is user+++", req.session.userId);
       if (req.session.userId) {
         user = req.session.userId;
       }

@@ -11,11 +11,15 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const query = `
-      SELECT title, users.name as author, status, LEFT(contents,100) as contents, stories.id
-      FROM stories
-      JOIN users ON users.id = stories.author_id
-      WHERE users.name = $1;
-      `;
+    SELECT title, users.name as author, stories.status,
+    LEFT(contents,100) as contents, stories.id,
+    count(contributions.id) as contributions_count
+    FROM stories
+    JOIN users ON users.id = stories.author_id
+    JOIN contributions ON stories.id = contributions.story_id
+    WHERE users.name = $1
+    GROUP BY stories.id, users.id;
+    `;
     const user = req.session.userId;
     const view = 'myStories'
     db.query(query, [user.name])
