@@ -45,12 +45,11 @@ const myStories = require("./routes/myStories");
 const viewStory = require("./routes/viewStory");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/login", loginRoute(db)); // ask Mahsa on monday about db
-app.use("/api/logout", logout(db));
-app.use("/api/newstory", newstoryRoute(db));
-app.use("/api/mystories", myStories(db));
-app.use("/api/story", viewStory(db));
+app.use("/login", loginRoute(db));
+app.use("/logout", logout(db));
+app.use("/newstory", newstoryRoute(db));
+app.use("/mystories", myStories(db));
+app.use("/story", viewStory(db));
 // Note: mount other resources here, using the same pattern above
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -69,7 +68,8 @@ app.get("/", (req, res) => {
       if (req.session.userId) {
         user = req.session.userId;
       }
-      const templateVars = { user, stories: result.rows };
+      let view = 'home';
+      const templateVars = { user, stories: result.rows, view };
       res.render("index", templateVars);
     })
     .catch((error) => {

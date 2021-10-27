@@ -44,11 +44,21 @@ module.exports = (db) => {
       .then(story => {
         database.addContribution(contributionText, contributorId, storyId)
           .then(result => {
-            // res.redirect('back');
+            res.redirect('back');
           })
+          .catch((e) => console.log(e.message));
       })
-
+      .catch((e) => console.log(e.message));
     
+  });
+
+  router.post('/:id/edit', (req,res) => {
+    const storyId = req.session.story;
+    database.markStoryComplete(storyId)
+      .then(result => {
+        res.redirect('back');
+
+      })
   })
   
 
