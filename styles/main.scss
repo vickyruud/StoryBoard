@@ -10,8 +10,13 @@ body {
 }
 
 .slogan {
-  margin-left: 1.5em;
-  padding-top: 4.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
 }
 
 article {
@@ -38,5 +43,12 @@ article {
 .story-listing__previews__details {
   height: fit-content;
 }
+.preview-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 
-
+}
+.btn-index {
+  background-color: white;
+}
