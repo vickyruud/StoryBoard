@@ -25,11 +25,13 @@
     <%- include('partials/_header') %>
     <main>
         <h5>Status: <%= story[0].status %></h5>
-        <% if (story[0].author_id === user.id && story[0]. status === "In Progress") { %>
-          <button type="button" onclick="">Mark Complete</button>
+        <% if (story[0].author_id === user.id && story[0].status === "In Progress") { %>
+          <form action = "/story/<%= story[0].id %>/edit" method = 'POST'>
+            <button > Mark Complete</button>
+          </form>
           <% } %>
       <section>
-          <div id="storyHolder" class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+          <div id="storyHolder" class="card text-white bg-secondary mb-3">
             <div class="card-header">Author: <%= story[0].name %></div>
             <div class="card-body">
               <h4 class="card-title"><%= story[0].title %></h4>
@@ -40,7 +42,7 @@
           <button type="button" onclick="showContributionBox();">Contribute</button>
         </div>
         <form
-          action="/api/story/<%= story[0].id %>"
+          action="/story/<%= story[0].id %>"
           method="POST"
           id="contribution-form">
 
@@ -52,12 +54,15 @@
         </form>
           <div class = "contributions-container">
             <% for (let i = story.length - 1; i >= 0; i--) {%>  
+              <%if(story[0].contribution_id){ %>
             <div><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
               <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %></div>
             </div>
+            <% } else { %>
+
             <% } %>
-              
+            <% } %>  
           </div>
 
           </div>
