@@ -51,6 +51,7 @@ app.use("/logout", logout(db));
 app.use("/newstory", newstoryRoute(db));
 app.use("/mystories", myStories(db));
 app.use("/story", viewStory(db));
+app.use("/deleteStory", deleteStory(db));
 // Note: mount other resources here, using the same pattern above
 // Home page
 // Warning: avoid creating more routes in this file!
