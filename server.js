@@ -43,6 +43,7 @@ const logout = require("./routes/logout");
 const newstoryRoute = require("./routes/newstory");
 const myStories = require("./routes/myStories");
 const viewStory = require("./routes/viewStory");
+const deleteStory = require("./routes/deleteStory");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -51,6 +52,7 @@ app.use("/api/logout", logout(db));
 app.use("/api/newstory", newstoryRoute(db));
 app.use("/api/mystories", myStories(db));
 app.use("/api/story", viewStory(db));
+app.use("/api/deletestory", deleteStory(db));
 // Note: mount other resources here, using the same pattern above
 // Home page
 // Warning: avoid creating more routes in this file!
