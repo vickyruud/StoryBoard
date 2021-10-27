@@ -48,7 +48,7 @@ const insertNewStory = function (
 exports.insertNewStory = insertNewStory;
 
 const getStoryAndContributions = function (storyId, user) {
-  const queryString = `SELECT stories.title, stories.author_id, users.name, stories.status, stories.contents,
+  const queryString = `SELECT stories.id, stories.title, stories.author_id, users.name, stories.status, stories.contents,
   contributions.id as contribution_id, contributions.contribution_text as contribution_text,
   contributions.status as contribution_status,
   contributions.created_on as contributions_date,
@@ -60,7 +60,6 @@ const getStoryAndContributions = function (storyId, user) {
   WHERE stories.id = $1;`
   return pool.query (queryString, [storyId])
     .then(res => {
-      console.log(res.rows);
       return res.rows;    
     });
 }
@@ -78,3 +77,13 @@ const addContribution = function (contribution, contributorId, storyId) {
 }
 
 exports.addContribution = addContribution;
+
+const markStoryComplete = function (storyId) {
+  const queryString = `UPDATE stories SET status = 'Complete' WHERE stories.id = $1;`
+  return pool.query(queryString, [storyId])
+    .then(res => res.rows)
+    .catch((err) => console.log(err.message));
+
+}
+
+exports.markStoryComplete = markStoryComplete;

@@ -27,7 +27,7 @@
               <h4 class="story-listing__title"> <%= stories[i].title %> </h4>
               <h6 class="story-listing__author"> By: <%= stories[i].author %> </h6>
               <h6 class="story-listing__status"> Status: <%= stories[i].status %></h6>
-              <a href="/api/story/<%= stories[i].id %>"><button class = "btn btn-success btn-small">View Story...</button></a>
+              <a href="/story/<%= stories[i].id %>"><button class = "btn btn-success btn-small">View Story...</button></a>
 
             </div>
             <textarea readonly class = "story-listing__previews__details"> <%= stories[i].contents %>... </textarea>

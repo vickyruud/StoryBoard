@@ -7,18 +7,18 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <% if (user) { %>
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href = "/api/mystories">My Stories</a>
-        <a class="nav-item nav-link" href="/api/newstory">Create New Story</a>
+        <a class="nav-item nav-link" href = "/mystories">My Stories</a>
+        <a class="nav-item nav-link" href="/newstory">Create New Story</a>
       </div>
       <% } %>
     </div>
     <% if (!user) { %>
       <div>
-        <a class="btn btn-primary" href="api/login">Login</a>
-        <a class="btn btn-primary" href="api/register">Register</a>
+        <a class="btn btn-primary" href="/login">Login</a>
+        <a class="btn btn-primary" href="/register">Register</a>
       </div>
     <% } else { %>
-    <form class="form-inline" action="/api/logout" method="POST">
+    <form class="form-inline" action="/logout" method="POST">
       <div>
         <%= user.name %>
         <button type="submit" class="btn btn-outline-primary">Logout</button>
