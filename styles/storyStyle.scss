@@ -2,10 +2,22 @@
 
 body{
   display: flex;
-  flex-wrap: wrap-reverse;
+  justify-content: stretch;
+}
+main{
+  padding-left: 10px;
 }
 
 .story-text{
   border : 500px;
-  ;
+
 }
+
+
+
+#yourContribution{
+  border-radius: 0 !important;
+  width: 300px;
+  height: 100px;
+  
+ }

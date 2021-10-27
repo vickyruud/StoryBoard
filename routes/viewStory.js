@@ -16,6 +16,8 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const storyId = req.params.id;
     const user = req.session.userId;
+    req.session.story = storyId;
+    
     return database.getStoryAndContributions(storyId)
     .then(story => {
       const templateVars = {story, user};
@@ -30,6 +32,25 @@ module.exports = (db) => {
 
   });
 
+  router.post("/", (req,res) => {
+    const user = req.session.userId;
+    if (req.body.yourContribution === "") {
+      return res.redirect('back');
+    }
+    const contributionText = req.body.yourContribution;
+    const contributorId = user.id
+    const storyId = req.session.story;
+    database.getStoryAndContributions(storyId)
+      .then(story => {
+        database.addContribution(contributionText, contributorId, storyId)
+          .then(result => {
+            res.redirect('back');
+          })
+      })
+
+    
+  })
+  
 
 
   return router;

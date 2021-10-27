@@ -32,7 +32,6 @@ const insertNewStory = function (
 ) {
   const queryString = `INSERT INTO stories(title,contents,created_on,author_id) VALUES($1, $2, $3, $4)  returning *`;
   const created_on = new Date();
-  console.log(created_on);
   const values = [story.title,
     story.contents,
     created_on,
@@ -67,4 +66,14 @@ const getStoryAndContributions = function (storyId, user) {
 
 exports.getStoryAndContributions = getStoryAndContributions;
 
+const addContribution = function (contribution, contributorId, storyId) {
+  const queryString = `INSERT INTO contributions (contribution_text, contributor_id, story_id, created_on)
+  VALUES ($1, $2, $3, $4) RETURNING *;`;
+  const created_on = new Date();
+  const queryParams = [contribution, contributorId, storyId, created_on];
+  return pool.query(queryString, queryParams)
+    .then(res => res.rows)
+    .catch((err) => console.log(err.message));
+}
 
+exports.addContribution = addContribution;
