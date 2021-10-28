@@ -76,7 +76,7 @@
                     <form action = "/story/<%= story[0].id %>/<%= story[i].contribution_id %>/accept" method = 'POST'>
                       <button class="btn btn-outline-success"> Accept</button>
                     </form>
-                    <form action = "/story/<%= story[0].id %>/delete" method = 'POST'>
+                    <form action = "/story/<%= story[0].id %>/<%= story[i].contribution_id %>/reject" method = 'POST'>
                       <button id="view-button" class="btn btn-outline-danger"> Reject</button>
                     </form>
                   </div>  

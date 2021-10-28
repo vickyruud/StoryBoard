@@ -86,7 +86,12 @@ module.exports = (db) => {
       }) 
     
   })
-
+  
+  router.post('/:id/:id/reject', (req, res) => {
+    contributionId = req.params.id;
+    database.rejectContribution(contributionId)
+      .then(res.redirect('back'));
+  })
 
   return router;
 
