@@ -11,6 +11,7 @@ module.exports = (db) => {
   });
   router.post("/", (req, res) => {
     if (req.body.contents === "" || req.body.title === "") {
+      
       return res.redirect('back');
     }
     const userId = req.session.userId;

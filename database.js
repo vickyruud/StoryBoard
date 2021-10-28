@@ -135,6 +135,19 @@ const updateContributionStatus = function (contributionId) {
 
 exports.updateContributionStatus = updateContributionStatus;
 
+const rejectContribution = function (contributorId) {
+
+  const queryString = `UPDATE contributions
+  SET status = 'Rejected'
+  WHERE id = $1;`
+
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows);
+
+}
+exports.rejectContribution = rejectContribution;
+
+
 const upVote = function (contributionId) {
   const queryString = `UPDATE contributions SET votes = votes + 1 WHERE id =$1;`
   return pool.query(queryString, [contributionId])
