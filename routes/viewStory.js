@@ -19,11 +19,10 @@ module.exports = (db) => {
     req.session.story = storyId;
 
     return database.getStoryAndContributions(storyId)
-    .then(story => {
+    .then(story => {  
       const templateVars = {story, user};
-      // console.log(templateVars);
       res.render('storyView', templateVars);
-      })
+    })
       .catch((error) => {
         console.log(error.message);
         res

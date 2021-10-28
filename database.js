@@ -73,8 +73,7 @@ const getContributorName = function (contributorId) {
 
   return pool.query(queryString, [contributorId])
     .then(res => {
-      console.log('This is from database:', res)
-
+      return res.rows;
     })
     .catch((e) => console.log(e.message));
 }
