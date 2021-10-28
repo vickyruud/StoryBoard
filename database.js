@@ -102,11 +102,26 @@ const markStoryComplete = function (storyId) {
 
 exports.markStoryComplete = markStoryComplete;
 
-const approveContribution = function (contributionId, storyId) {
-  const queryString = `INSERT INTO stories (contents)
-  SELECT contribution_text FROM contributions
-  WHERE contribution.id = $1 AND story.id =$2`
+const findContributionText = function (contributionId) {
+  const queryString = `SELECT contribution_text 
+  FROM contributions
+  WHERE id = $1;`
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows[0]);
 }
+
+exports.findContributionText = findContributionText;
+
+const acceptContribution = function (text, storyId) {
+  queryString = `UPDATE stories SET contents = CONCAT (contents, $1)
+  WHERE id = $2;`
+
+  return pool.query(queryString, [text, storyId])
+    .then(res => res.rows);
+
+}
+
+exports.acceptContribution = acceptContribution;
 
 const upVote = function (contributionId) {
   const queryString = `UPDATE contributions SET votes = votes+1 WHERE id =$1;`
