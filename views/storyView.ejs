@@ -62,16 +62,25 @@
           <div class = "contributions-container">
             <div class="contribution-text"><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
-              <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %>
+                <% if (story[0].status === 'In Progress') {%>
+                  <form action = "/story/<%= story[i].contribution_id%>/upvote" method = 'POST'>
+                    <button class="btn btn-outline-info"> <i class="fas fa-arrow-up"></i></button>
+                  </form>
+                <% } %>
+                Votes : <%= story[i].contributions_votes %>
+                <div>Status: <%= story[i].contribution_status %></div> <div>Contributed By: <%= story[i].contributor_id %></div>
                 <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>                  
-                    <form action = "/story/<%= story[0].id %>/approve" method = 'POST'>
-                      <button class="btn btn-outline-success"> Approve</button>
+                  <div class ="approve-reject">
+
+                    <form action = "/story/<%= story[0].id %>/accept" method = 'POST'>
+                      <button class="btn btn-outline-success"> Accept</button>
                     </form>
                     <form action = "/story/<%= story[0].id %>/delete" method = 'POST'>
                       <button class="btn btn-outline-danger"> Reject</button>
                     </form>
+                  </div>  
                   <% } %>
-              </div>
+              
             </div>
           </div>
             <% } else { %>

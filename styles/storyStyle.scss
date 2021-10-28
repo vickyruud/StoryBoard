@@ -33,7 +33,7 @@ main{
 
  .contributions-container {
   border: 0.5px solid; 
-  margin: 10px;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -47,7 +47,16 @@ main{
  }
 
  .contributions-footer{
-   color: brown;
+   color: rgb(68, 68, 158);
    display: flex;
    flex-direction: row;
+   justify-content: space-between;
+   align-items: flex-end;
+   padding-left: 10px;
+   padding-right: 10px;
+    
+ }
+ #contribution-status{
+   display: flex;
+   align-items: flex-end;
  }
