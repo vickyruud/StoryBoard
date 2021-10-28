@@ -65,7 +65,6 @@ module.exports = (db) => {
 
   router.post('/:id/upvote', (req,res) => {
     contributionId = req.params.id;
-    console.log(contributionId);
     database.upVote(contributionId)
       .then(result => 
         res.redirect('back'))
