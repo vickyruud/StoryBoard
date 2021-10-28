@@ -71,6 +71,12 @@ module.exports = (db) => {
     
   })
 
+  router.post('/:id/accept', (req,res) => {
+    contributionId = req.params.id;
+    
+    
+  })
+
 
   return router;
 
