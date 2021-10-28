@@ -17,7 +17,7 @@ module.exports = (db) => {
     const storyId = req.params.id;
     const user = req.session.userId;
     req.session.story = storyId;
-    
+
     return database.getStoryAndContributions(storyId)
     .then(story => {
       const templateVars = {story, user};
@@ -42,6 +42,7 @@ module.exports = (db) => {
     const contributionText = req.body.yourContribution;
     const contributorId = user.id
     const storyId = req.session.story;
+    console.log('$$$$$',storyId);
     database.getStoryAndContributions(storyId)
       .then(story => {
         database.addContribution(contributionText, contributorId, storyId)
@@ -51,7 +52,7 @@ module.exports = (db) => {
           .catch((e) => console.log(e.message));
       })
       .catch((e) => console.log(e.message));
-    
+
   });
 
   router.post('/:id/edit', (req,res) => {
@@ -62,7 +63,7 @@ module.exports = (db) => {
 
       })
   })
-  
+
 
 
   return router;

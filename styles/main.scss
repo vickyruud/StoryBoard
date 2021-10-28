@@ -1,16 +1,55 @@
 @import './variables';
-
 body {
   display: flex;
   flex-direction: column;
+  // justify-content: center;
   align-items: stretch;
   min-height: 100vh;
   background: $backgroundColor;
 }
-
+.slogan {
+  display: flex;
+  flex-direction: column;
+}
 nav {
-  position: fixed;
-  width: 100%;
   display: flex;
   flex-direction: row;
 }
+article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em;
+}
+.story_listing {
+  padding: 200em;
+}
+.story-listing__preview {
+  display: flex;
+  flex-direction:column;
+  justify-content: stretch;
+}
+.story-listing__previews__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.story-listing__previews__details {
+  height: fit-content;
+}
+.preview-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+.btn-index {
+  background-color: white;
+}
+  #view-button
+  {
+    color: black;
+  }
+  #click-button {
+    color: black;
+  };
+
