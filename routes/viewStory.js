@@ -71,12 +71,27 @@ module.exports = (db) => {
     
   })
 
-  router.post('/:id/accept', (req,res) => {
+  router.post('/:id/:id/accept', (req,res) => {
     contributionId = req.params.id;
-    
+    storyId = req.session.story
+    database.findContributionText(contributionId)
+      .then(contribution =>{
+        const text = contribution.contribution_text;
+        const status = contribution.status
+        database.acceptContribution(text, storyId, status)
+          .then(result => 
+            database.updateContributionStatus(contributionId)
+              .then(
+                res.redirect('back')))
+      }) 
     
   })
-
+  
+  router.post('/:id/:id/reject', (req, res) => {
+    contributionId = req.params.id;
+    database.rejectContribution(contributionId)
+      .then(res.redirect('back'));
+  })
 
   return router;
 

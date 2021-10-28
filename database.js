@@ -102,14 +102,54 @@ const markStoryComplete = function (storyId) {
 
 exports.markStoryComplete = markStoryComplete;
 
-const approveContribution = function (contributionId, storyId) {
-  const queryString = `INSERT INTO stories (contents)
-  SELECT contribution_text FROM contributions
-  WHERE contribution.id = $1 AND story.id =$2`
+const findContributionText = function (contributionId) {
+  const queryString = `SELECT contribution_text, status 
+  FROM contributions
+  WHERE id = $1;`
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows[0]);
 }
 
+exports.findContributionText = findContributionText;
+
+const acceptContribution = function (text, storyId , status) {
+  queryString = `UPDATE stories
+  SET contents = contents || '_' || $1
+  WHERE id = $2;`
+
+  return pool.query(queryString, [text, storyId])
+    .then(res => res.rows);
+
+}
+
+exports.acceptContribution = acceptContribution;
+
+const updateContributionStatus = function (contributionId) {
+  const queryString = `UPDATE contributions
+  SET status = 'Accepted'
+  WHERE id = $1;`
+
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows);
+}
+
+exports.updateContributionStatus = updateContributionStatus;
+
+const rejectContribution = function (contributorId) {
+
+  const queryString = `UPDATE contributions
+  SET status = 'Rejected'
+  WHERE id = $1;`
+
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows);
+
+}
+exports.rejectContribution = rejectContribution;
+
+
 const upVote = function (contributionId) {
-  const queryString = `UPDATE contributions SET votes = votes+1 WHERE id =$1;`
+  const queryString = `UPDATE contributions SET votes = votes + 1 WHERE id =$1;`
   return pool.query(queryString, [contributionId])
     .then (res => res.rows)
     .catch((err) => console.log(err.message));
