@@ -26,7 +26,7 @@ CREATE TABLE contributions (
   contribution_text TEXT,
   status VARCHAR(255) DEFAULT 'In Progress',
   created_on DATE NOT NULL,
-  votes INTEGER,
+  votes INTEGER DEFAULT 0,
   contributor_id INTEGER REFERENCES users(id)  ON DELETE CASCADE,
   story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE
 );

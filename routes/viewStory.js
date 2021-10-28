@@ -19,12 +19,10 @@ module.exports = (db) => {
     req.session.story = storyId;
 
     return database.getStoryAndContributions(storyId)
-    .then(story => {
+    .then(story => {  
       const templateVars = {story, user};
-      console.log('user:', user)
-      console.log('Story:', story[0])
       res.render('storyView', templateVars);
-      })
+    })
       .catch((error) => {
         console.log(error.message);
         res
@@ -64,6 +62,20 @@ module.exports = (db) => {
       })
   })
 
+  router.post('/:id/upvote', (req,res) => {
+    contributionId = req.params.id;
+    database.upVote(contributionId)
+      .then(result => 
+        res.redirect('back'))
+      .catch((e) => console.log(e.message));  
+    
+  })
+
+  router.post('/:id/accept', (req,res) => {
+    contributionId = req.params.id;
+    
+    
+  })
 
 
   return router;

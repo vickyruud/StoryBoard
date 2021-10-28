@@ -66,6 +66,20 @@ const getStoryAndContributions = function (storyId, user) {
 
 exports.getStoryAndContributions = getStoryAndContributions;
 
+const getContributorName = function (contributorId) {
+  const queryString = `SELECT users.name FROM users 
+  JOIN contributions ON contributions.contributor_id = users.id
+  WHERE contributions.contributor_id = $1 LIMIT 1;`
+
+  return pool.query(queryString, [contributorId])
+    .then(res => {
+      return res.rows;
+    })
+    .catch((e) => console.log(e.message));
+}
+
+exports.getContributorName = getContributorName
+
 const addContribution = function (contribution, contributorId, storyId) {
   const queryString = `INSERT INTO contributions (contribution_text, contributor_id, story_id, created_on)
   VALUES ($1, $2, $3, $4) RETURNING *;`;
@@ -87,3 +101,18 @@ const markStoryComplete = function (storyId) {
 }
 
 exports.markStoryComplete = markStoryComplete;
+
+const approveContribution = function (contributionId, storyId) {
+  const queryString = `INSERT INTO stories (contents)
+  SELECT contribution_text FROM contributions
+  WHERE contribution.id = $1 AND story.id =$2`
+}
+
+const upVote = function (contributionId) {
+  const queryString = `UPDATE contributions SET votes = votes+1 WHERE id =$1;`
+  return pool.query(queryString, [contributionId])
+    .then (res => res.rows)
+    .catch((err) => console.log(err.message));
+}
+
+exports.upVote = upVote;

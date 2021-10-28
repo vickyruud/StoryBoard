@@ -19,7 +19,7 @@
 
      <!-- Font Awesome-->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Story View</title>
+    <title><%= story[0].title %></title>
   </head>
   <body>
     <%- include('partials/_header') %>
@@ -62,16 +62,25 @@
           <div class = "contributions-container">
             <div class="contribution-text"><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
-              <div> <i id="heart" class="fas fa-heart"></i> <%= story[i].contributions_votes %> <%= story[i].contribution_status %> Contributed By: <%= story[i].contributor_id %>
-                <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>
-                    <form action = "/story/<%= story[0].id %>/approve" method = 'POST'>
-                      <button id="view-button" class="btn btn-outline-warning"> Approve</button>
+                <% if (story[0].status === 'In Progress') {%>
+                  <form action = "/story/<%= story[i].contribution_id%>/upvote" method = 'POST'>
+                    <button class="btn btn-outline-info"> <i class="fas fa-arrow-up"></i></button>
+                  </form>
+                <% } %>
+                Votes : <%= story[i].contributions_votes %>
+                <div>Status: <%= story[i].contribution_status %></div> <div>Contributed By: <%= story[i].contributor_id %></div>
+                <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>                  
+                  <div class ="approve-reject">
+
+                    <form action = "/story/<%= story[0].id %>/accept" method = 'POST'>
+                      <button class="btn btn-outline-success"> Accept</button>
                     </form>
                     <form action = "/story/<%= story[0].id %>/delete" method = 'POST'>
                       <button id="view-button" class="btn btn-outline-danger"> Reject</button>
                     </form>
+                  </div>  
                   <% } %>
-              </div>
+              
             </div>
           </div>
             <% } else { %>
@@ -83,5 +92,8 @@
           </div>
       </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
   </body>
 </html>
