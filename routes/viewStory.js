@@ -74,14 +74,15 @@ module.exports = (db) => {
   router.post('/:id/:id/accept', (req,res) => {
     contributionId = req.params.id;
     storyId = req.session.story
-    console.log('params id:', contributionId);   
-    console.log('story id:', storyId);  
     database.findContributionText(contributionId)
       .then(contribution =>{
         const text = contribution.contribution_text;
-        database.acceptContribution(text, storyId)
+        const status = contribution.status
+        database.acceptContribution(text, storyId, status)
           .then(result => 
-            res.redirect('back'))
+            database.updateContributionStatus(contributionId)
+              .then(
+                res.redirect('back')))
       }) 
     
   })

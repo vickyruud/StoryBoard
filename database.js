@@ -103,7 +103,7 @@ const markStoryComplete = function (storyId) {
 exports.markStoryComplete = markStoryComplete;
 
 const findContributionText = function (contributionId) {
-  const queryString = `SELECT contribution_text 
+  const queryString = `SELECT contribution_text, status 
   FROM contributions
   WHERE id = $1;`
   return pool.query(queryString, [contributionId])
@@ -112,8 +112,9 @@ const findContributionText = function (contributionId) {
 
 exports.findContributionText = findContributionText;
 
-const acceptContribution = function (text, storyId) {
-  queryString = `UPDATE stories SET contents = CONCAT (contents, $1)
+const acceptContribution = function (text, storyId , status) {
+  queryString = `UPDATE stories
+  SET contents = contents || '_' || $1
   WHERE id = $2;`
 
   return pool.query(queryString, [text, storyId])
@@ -123,8 +124,19 @@ const acceptContribution = function (text, storyId) {
 
 exports.acceptContribution = acceptContribution;
 
+const updateContributionStatus = function (contributionId) {
+  const queryString = `UPDATE contributions
+  SET status = 'Accepted'
+  WHERE id = $1;`
+
+  return pool.query(queryString, [contributionId])
+    .then(res => res.rows);
+}
+
+exports.updateContributionStatus = updateContributionStatus;
+
 const upVote = function (contributionId) {
-  const queryString = `UPDATE contributions SET votes = votes+1 WHERE id =$1;`
+  const queryString = `UPDATE contributions SET votes = votes + 1 WHERE id =$1;`
   return pool.query(queryString, [contributionId])
     .then (res => res.rows)
     .catch((err) => console.log(err.message));

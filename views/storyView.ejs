@@ -62,7 +62,7 @@
           <div class = "contributions-container">
             <div class="contribution-text"><%= story[i].contribution_text %></div>
               <div class = "contributions-footer">
-                <% if (story[0].status === 'In Progress' && (user)) {%>
+                <% if (story[0].status === 'In Progress' && (user) && story[i].contribution_status !== 'Accepted' && story[i].contribution_status !== 'Rejected' ) {%>
                   <form action = "/story/<%= story[i].contribution_id%>/upvote" method = 'POST'>
                     <button class="btn btn-outline-info"> <i class="fas fa-arrow-up"></i></button>
                   </form>
@@ -70,7 +70,7 @@
                 Votes : <%= story[i].contributions_votes %>
                 <div>Status: <%= story[i].contribution_status %></div> <div>Contributed By: <%= story[i].contributor_id %></div>
                 <% if (user) {%>
-                <% if (story[0].author_id === user.id && story[0].status !== 'Completed') { %>                  
+                <% if (story[0].author_id === user.id && story[0].status !== 'Completed' && story[i].contribution_status !== 'Accepted' && story[i].contribution_status !== 'Rejected' ) { %>                  
                   <div class ="approve-reject">
 
                     <form action = "/story/<%= story[0].id %>/<%= story[i].contribution_id %>/accept" method = 'POST'>
