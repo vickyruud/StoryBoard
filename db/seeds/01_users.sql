@@ -43,3 +43,7 @@ INSERT INTO users (
     name, email, password)
     VALUES (
     'Micheal Page', 'kennedyparks@mail.com', 'password');
+    INSERT INTO users (
+    name, email, password)
+    VALUES (
+    'Midterm Project', 'a@b.c', 'password');

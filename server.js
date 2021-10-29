@@ -59,14 +59,14 @@ app.use("/deleteStory", deleteStory(db));
 app.get("/", (req, res) => {
   db.query(
     `
-    SELECT title, users.name as author, stories.status,
+    SELECT title, users.name as author, stories.status, stories.created_on,
       LEFT(contents,100) as contents, stories.id,
       count(contributions.id) as contributions_count
     FROM stories
     JOIN users ON users.id = stories.author_id
     LEFT JOIN contributions ON stories.id = contributions.story_id
     GROUP BY stories.id, users.id
-    ORDER BY stories.id;
+    ORDER BY stories.created_on;
     `
   )
     .then((result) => {
