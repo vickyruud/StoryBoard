@@ -35,7 +35,7 @@
               <div class = "preview-action">
                 <% if (user) { %>
                   <% if (stories[i].status.includes("In Progress") && user.name === stories[i].author && view === 'myStories') { %>
-                    <a href="/story/<%= stories[i].id %>"><button id ="view-button" class = "btn btn-warning">Edit</button></a>
+                    <a href="/story/<%= stories[i].id %>"><button id ="view-button" class = "btn btn-warning">View</button></a>
                     <a href="/deletestory/<%= stories[i].id %>"><button class = "btn btn-outline-secondary btn-index">Delete</button></a>
                   <% } else { %>
                     <a href="/story/<%= stories[i].id %>"><button id="view-button" class = "btn btn-warning">View</button></a>
