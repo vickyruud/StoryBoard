@@ -13,13 +13,15 @@ const database = require('../database');
 module.exports = (db) => {
 
 
+  //gets the story and all it's contributions and renders the page
+
   router.get("/:id", (req, res) => {
     const storyId = req.params.id;
     const user = req.session.userId;
     req.session.story = storyId;
 
     return database.getStoryAndContributions(storyId)
-    .then(story => {  
+    .then(story => { 
       const templateVars = {story, user};
       res.render('storyView', templateVars);
     })
@@ -32,11 +34,10 @@ module.exports = (db) => {
 
   });
 
+  //submits a contribution
+
   router.post("/:id", (req,res) => {
     const user = req.session.userId;
-    if (req.body.yourContribution === "") {
-      return res.redirect('back');
-    }
     const contributionText = req.body.yourContribution;
     const contributorId = user.id
     const storyId = req.session.story;
