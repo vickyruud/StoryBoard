@@ -25,7 +25,6 @@ module.exports = (db) => {
         database.getContributions(storyId)
           .then(contributions => {
             const templateVars = {story, user, contributions};
-            console.log(templateVars);
             res.render('storyView', templateVars);
             
           })      
@@ -46,7 +45,6 @@ module.exports = (db) => {
     const contributionText = req.body.yourContribution;
     const contributorId = user.id
     const storyId = req.session.story;
-    console.log('$$$$$',storyId);
     database.getStory(storyId)
       .then(story => {
         database.getContributions(storyId)
