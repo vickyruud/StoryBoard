@@ -47,11 +47,15 @@ module.exports = (db) => {
     const contributorId = user.id
     const storyId = req.session.story;
     console.log('$$$$$',storyId);
-    database.getStoryAndContributions(storyId)
+    database.getStory(storyId)
       .then(story => {
-        database.addContribution(contributionText, contributorId, storyId)
-          .then(result => {
-            res.redirect('back');
+        database.getContributions(storyId)
+          .then(response => {
+            database.addContribution(contributionText, contributorId, storyId)
+            .then(result => {
+              res.redirect('back');
+            })
+
           })
           .catch((e) => console.log(e.message));
       })

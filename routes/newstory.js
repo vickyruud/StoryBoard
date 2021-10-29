@@ -18,7 +18,13 @@ module.exports = (db) => {
     database
       .insertNewStory({ ...req.body, author_id: userId.id })
       .then((newStory) => {
-        res.redirect('/myStories');
+        database.getNewStoryID()
+        .then(Id => {
+          console.log(Id[0].max);
+          res.redirect(`/story/${Id[0].max}`);
+        }
+
+          )
       })
       .catch((e) => res.send(e));
   });

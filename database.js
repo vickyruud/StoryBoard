@@ -76,6 +76,15 @@ const getContributions = function (storyId) {
 
 exports.getContributions = getContributions;
 
+const getNewStoryID = function () {
+  queryString = `SELECT MAX(id) FROM stories`
+  return pool.query(queryString)
+    .then(res => res.rows);
+
+}
+
+exports.getNewStoryID = getNewStoryID;
+
 const getContributorName = function (contributorId) {
   const queryString = `SELECT users.name 
   FROM users 
