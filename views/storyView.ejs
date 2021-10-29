@@ -57,26 +57,26 @@
         </form>
       <% } %>
           <div class = "container">
-            <% for (let i = story.length - 1; i >= 0; i--) {%>
-              <%if(story[0].contribution_id){ %>
+            <% for (let i = contributions.length - 1; i >= 0; i--) {%>
+              <%if(contributions[i].contribution_id) { %>
           <div class = "contributions-container">
-            <div class="contribution-text"><%= story[i].contribution_text %></div>
+            <div class="contribution-text"><%= contributions[i].contribution_text %></div>
               <div class = "contributions-footer">
-                <% if (story[0].status === 'In Progress' && (user) && story[i].contribution_status !== 'Accepted' && story[i].contribution_status !== 'Rejected' ) {%>
-                  <form action = "/story/<%= story[i].contribution_id%>/upvote" method = 'POST'>
+                <% if (story[0].status === 'In Progress' && (user) && contributions[i].contribution_status !== 'Accepted' && contributions[i].contribution_status !== 'Rejected' ) {%>
+                  <form action = "/story/<%= contributions[i].contribution_id%>/upvote" method = 'POST'>
                     <button class="btn btn-outline-info"> <i class="fas fa-arrow-up"></i></button>
                   </form>
                 <% } %>
-                Votes : <%= story[i].contributions_votes %>
-                <div>Status: <%= story[i].contribution_status %></div> <div>Contributed By: <%= story[i].contributor_id %></div>
+                Votes : <%= contributions[i].contributions_votes %>
+                <div>Status: <%= contributions[i].contribution_status %></div> <div>Contributed By: <%= contributions[i].contributor_name %></div>
                 <% if (user) {%>
-                <% if (story[0].author_id === user.id && story[0].status !== 'Completed' && story[i].contribution_status !== 'Accepted' && story[i].contribution_status !== 'Rejected' ) { %>                  
+                <% if (story[0].author_id === user.id && story[0].status !== 'Completed' && contributions[i].contribution_status !== 'Accepted' && contributions[i].contribution_status !== 'Rejected' ) { %>                  
                   <div class ="approve-reject">
 
-                    <form action = "/story/<%= story[0].id %>/<%= story[i].contribution_id %>/accept" method = 'POST'>
+                    <form action = "/story/<%= story[0].id %>/<%= contributions[i].contribution_id %>/accept" method = 'POST'>
                       <button class="btn btn-outline-success"> Accept</button>
                     </form>
-                    <form action = "/story/<%= story[0].id %>/<%= story[i].contribution_id %>/reject" method = 'POST'>
+                    <form action = "/story/<%= story[0].id %>/<%= contributions[i].contribution_id %>/reject" method = 'POST'>
                       <button id="view-button" class="btn btn-outline-danger"> Reject</button>
                     </form>
                   </div>  

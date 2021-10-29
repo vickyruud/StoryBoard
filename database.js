@@ -47,16 +47,10 @@ const insertNewStory = function (
 };
 exports.insertNewStory = insertNewStory;
 
-const getStoryAndContributions = function (storyId, user) {
-  const queryString = `SELECT stories.id, stories.title, stories.author_id, users.name, stories.status, stories.contents,
-  contributions.id as contribution_id, contributions.contribution_text as contribution_text,
-  contributions.status as contribution_status,
-  contributions.created_on as contributions_date,
-  contributions.votes as contributions_votes,
-  contributions.contributor_id as contributor_id, contributions.story_id as contributions_story_id
+const getStory = function (storyId, user) {
+  const queryString = `SELECT stories.id, stories.title, stories.author_id, users.name, stories.status, stories.contents
   FROM stories
   JOIN users ON users.id = stories.author_id
-  LEFT JOIN contributions ON stories.id = contributions.story_id
   WHERE stories.id = $1;`;
   return pool.query(queryString, [storyId])
     .then(res => {
@@ -64,10 +58,27 @@ const getStoryAndContributions = function (storyId, user) {
     });
 }
 
-exports.getStoryAndContributions = getStoryAndContributions;
+exports.getStory = getStory;
+
+const getContributions = function (storyId) {
+  const queryString = `SELECT contributions.id as contribution_id, contributions.contribution_text as contribution_text,
+  contributions.status as contribution_status,
+  contributions.created_on as contributions_date,
+  contributions.votes as contributions_votes,
+  contributions.contributor_id as contributor_id, contributions.story_id as contributions_story_id, users.name as contributor_name
+  FROM contributions
+  JOIN users ON users.id = contributions.contributor_id
+  WHERE contributions.story_id = $1;`
+
+  return pool.query (queryString, [storyId])
+    .then(res=> res.rows)
+}
+
+exports.getContributions = getContributions;
 
 const getContributorName = function (contributorId) {
-  const queryString = `SELECT users.name FROM users 
+  const queryString = `SELECT users.name 
+  FROM users 
   JOIN contributions ON contributions.contributor_id = users.id
   WHERE contributions.contributor_id = $1 LIMIT 1;`
 

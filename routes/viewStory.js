@@ -20,10 +20,15 @@ module.exports = (db) => {
     const user = req.session.userId;
     req.session.story = storyId;
 
-    return database.getStoryAndContributions(storyId)
+    return database.getStory(storyId)
     .then(story => {
-      const templateVars = {story, user};
-      res.render('storyView', templateVars);
+        database.getContributions(storyId)
+          .then(contributions => {
+            const templateVars = {story, user, contributions};
+            console.log(templateVars);
+            res.render('storyView', templateVars);
+            
+          })      
     })
       .catch((error) => {
         console.log(error.message);
