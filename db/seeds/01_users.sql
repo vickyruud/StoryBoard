@@ -46,4 +46,4 @@ INSERT INTO users (
     INSERT INTO users (
     name, email, password)
     VALUES (
-    'Midterm Project', 'a@b.c', 'password');
+    'J.R.R Tolkien', 'a@b.c', 'password');
