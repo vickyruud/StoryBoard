@@ -2,6 +2,9 @@ StoryBoard - The Power of Collaborative Imagination
 =========
 Where users can collaborate to weave a dream tale out of the threads of their imagination. There is no limit to creativity and the power of writing collaboratively is amazing!
 
+## Tech Stack
+Node JS, PSQL, Express, SASS
+
 ## Getting Started
 
 1. Install dependencies: `npm i`
