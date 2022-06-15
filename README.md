@@ -6,6 +6,7 @@ Where users can collaborate to weave a dream tale out of the threads of their im
 
 1. Install dependencies: `npm i`
 2. Run the server: `npm run local`
+3. Create a .env file using .env.example as the template.
 3. Run the database reset: `npm run db:reset`
 4. Visit `http://localhost:8080/`
 
